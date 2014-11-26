@@ -7,6 +7,11 @@
 #include <algorithm>
 #include <boost/type_traits/is_unsigned.hpp>
 
+#if defined(_MSC_VER)
+// Seems Visual C++ didn't optimize rotate shift, so use intrinsics
+#include <stdlib.h> // for rol/ror intrinsics
+#endif
+
 // HSM_ : Hash String Map
 #define HSM_SANITY assert
 
@@ -16,9 +21,9 @@
 	#define HSM_unlikely(expr) expr
 #endif
 
+namespace nark {
+
 #if defined(_MSC_VER)
-// Seems Visual C++ didn't optimize rotate shift, so use intrinsics
-#include <stdlib.h> // for rol/ror intrinsics
 inline unsigned __int64
 msc_rotate_left(unsigned __int64 val, int c) { return _rotl64(val, c); }
 inline unsigned int
@@ -141,7 +146,7 @@ inline size_t __hsm_align_pow2(size_t x) {
 		return size_t(1) << p;
 }
 
-namespace nark { namespace hash_common {
+namespace hash_common {
 
 	template<bool Test, class Then, class Else>
 	struct IF { typedef Then type; };
@@ -160,7 +165,7 @@ namespace nark { namespace hash_common {
 		typedef uint64_t Uint;
 		static const Uint value = Uint(-1);
 	};
-} } // nark::hash_common
+} // hash_common
 
 template<class Uint, int Bits = sizeof(Uint) * 8>
 struct dummy_bucket {
@@ -266,6 +271,9 @@ private:
 		}
 	}
 };
+
+} // namespace nark
+
 
 #endif // __nark_fast_hash_common__
 

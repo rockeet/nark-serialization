@@ -6,6 +6,8 @@
 
 #include "config.hpp"
 
+namespace nark {
+
 FEBIRD_DLL_EXPORT int num_to_str(char* buf, bool x);
 FEBIRD_DLL_EXPORT int num_to_str(char* buf, short x);
 FEBIRD_DLL_EXPORT int num_to_str(char* buf, int x);
@@ -42,6 +44,8 @@ struct string_appender : public String {
 	string_appender& operator<<(double x) { char buf[96]; this->append(buf, num_to_str(buf, x)); return *this; };
 	string_appender& operator<<(long double x) { char buf[96]; this->append(buf, num_to_str(buf, x)); return *this; };
 };
+
+} // namespace nark
 
 #endif // __nark_num_to_str_hpp__
 

@@ -39,6 +39,7 @@
 	#define HSM_FORCE_INLINE inline
 #endif
 
+namespace nark {
 
 //************************************************************************
 // std components that could use FastCopy:
@@ -495,6 +496,8 @@ void node_layout_copy_cons(
 	}
 	memcpy(x.aLink, ly, sizeof(Link)*size);
 }
+
+} // namespace nark
 
 #endif // __nark_node_layout_hpp__
 

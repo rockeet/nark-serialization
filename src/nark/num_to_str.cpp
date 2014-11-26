@@ -3,6 +3,8 @@
 #include <assert.h>
 //#include <boost/type_traits.hpp>
 
+namespace nark {
+
 int num_to_str(char* buf, bool x) {
 	buf[0] = "01"[x?1:0];
 	buf[1] = 0;
@@ -85,4 +87,5 @@ GEN_num_to_str(unsigned, int)
 GEN_num_to_str(unsigned, long)
 GEN_num_to_str(unsigned, long long)
 
+} // namespace nark
 

@@ -20,6 +20,8 @@
 //#include <boost/static_assert.hpp>
 #include <boost/utility/enable_if.hpp>
 
+namespace nark {
+
 inline size_t nark_fstrlen(const char* s) { return strlen(s); }
 inline size_t nark_fstrlen(const uint16_t* s) {
 	size_t n = 0;
@@ -288,6 +290,6 @@ FEBIRD_DLL_EXPORT bool operator>(fstring16 x, fstring16 y);
 FEBIRD_DLL_EXPORT bool operator<=(fstring16 x, fstring16 y);
 FEBIRD_DLL_EXPORT bool operator>=(fstring16 x, fstring16 y);
 
+} // namespace nark
+
 #endif // __nark_fstring_hpp__
-
-

@@ -15,7 +15,7 @@
 	typedef std::map<std::string, void*> NameMapBase;
 #else
 	#include "../hash_strmap.hpp"
-	typedef hash_strmap<void*> NameMapBase;
+	typedef nark::hash_strmap<void*> NameMapBase;
 #endif
 
 namespace nark {

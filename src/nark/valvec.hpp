@@ -50,6 +50,8 @@
   #endif
 #endif
 
+namespace nark {
+
 #ifdef _MSC_VER
 	template<class T>
 	void STDEXT_destroy_range_aux(T*, T*, boost::mpl::true_) {}
@@ -906,11 +908,6 @@ bool valvec_equalTo(const valvec<T>& x, const valvec<T>& y) {
 	return valvec<T>::equalTo(x, y, std::equal_to<T>());
 }
 
-namespace std {
-	template<class T>
-	void swap(valvec<T>& x, valvec<T>& y) { x.swap(y); }
-}
-
 /// STL like algorithm with array/RanIt and size_t param
 
 template<class RanIt, class Key>
@@ -1117,6 +1114,12 @@ size_t unique_a(Container& a, size_t low, size_t upp) {
 	return std::unique(a.begin() + low, a.begin() + upp) - low - a.begin();
 }
 
+} // namespace nark
+
+namespace std {
+	template<class T>
+	void swap(nark::valvec<T>& x, nark::valvec<T>& y) { x.swap(y); }
+}
 
 #endif
 

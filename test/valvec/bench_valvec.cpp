@@ -2,6 +2,8 @@
 #include <nark/util/profiling.cpp>
 #include <vector>
 
+using namespace nark;
+
 int main(int argc, char* argv[]) {
 	nark::profiling pf;
 	long M_cnt = argc >= 2 ? atoi(argv[1]) : 32;

@@ -86,6 +86,48 @@ BOOST_STATIC_ASSERT(sizeof(align_type) == SP_ALIGN);
 	#define IF_SP_ALIGN(Then, Else) Then
 #endif
 
+namespace nark {
+	template<class LinkTp>
+	struct KeyIndexWithPrefix_tt {
+		LinkTp offset;
+		LinkTp length;
+		LinkTp prefix; // string prefix, for optimize CPU Cache
+		LinkTp idx; // index to pNodes
+	};
+
+	template<class LinkTp, class LinkT2, class Value>
+	struct NodeWithPrefix_tt {
+		LinkTp offset;
+		LinkTp length;
+		LinkT2 prefix; // string prefix, for optimize CPU Cache
+		Value  value;
+	};
+} // namespace nark
+
+namespace std {
+	template<class LinkTp>
+	inline void swap(nark::KeyIndexWithPrefix_tt<LinkTp>& x,
+					 nark::KeyIndexWithPrefix_tt<LinkTp>& y)
+	{
+		std::swap(x.offset, y.offset);
+		std::swap(x.length, y.length);
+		std::swap(x.prefix, y.prefix);
+		std::swap(x.idx, y.idx);
+	}
+	template<class LinkTp, class LinkT2, class Value>
+	inline void swap(nark::NodeWithPrefix_tt<LinkTp, LinkT2, Value>& x,
+					 nark::NodeWithPrefix_tt<LinkTp, LinkT2, Value>& y)
+	{
+		std::swap(x.offset, y.offset);
+		std::swap(x.length, y.length);
+		std::swap(x.prefix, y.prefix);
+		std::swap(x.value, y.value);
+	//	boost::swap(x.value, y.value); // Arguments Dependent Lookup
+	}
+} // namespace std
+
+namespace nark {
+
 struct fstring_func {
 	// 3-way compare
 	class prefix_compare3 {
@@ -275,22 +317,6 @@ struct fstring_hash_equal_align
 struct fstring_hash_equal_unalign
   : hash_and_equal<fstring, fstring_func::hash_unalign, fstring_func::equal_unalign> {};
 
-template<class LinkTp>
-struct KeyIndexWithPrefix_tt {
-	LinkTp offset;
-	LinkTp length;
-	LinkTp prefix; // string prefix, for optimize CPU Cache
-	LinkTp idx; // index to pNodes
-};
-
-template<class LinkTp, class LinkT2, class Value>
-struct NodeWithPrefix_tt {
-	LinkTp offset;
-	LinkTp length;
-	LinkT2 prefix; // string prefix, for optimize CPU Cache
-	Value  value;
-};
-
 struct ByteWiseKeyCompare {
 	const char* ps;
 	template<class TWithPrefix>
@@ -306,26 +332,6 @@ struct ByteWiseKeyCompare {
 	}
 	ByteWiseKeyCompare(const char* ps) : ps(ps) {}
 };
-
-namespace std {
-	template<class LinkTp>
-	void swap(KeyIndexWithPrefix_tt<LinkTp>& x,
-		      KeyIndexWithPrefix_tt<LinkTp>& y) {
-		std::swap(x.offset, y.offset);
-		std::swap(x.length, y.length);
-		std::swap(x.prefix, y.prefix);
-		std::swap(x.idx   , y.idx   );
-	}
-	template<class LinkTp, class LinkT2, class Value>
-	void swap(NodeWithPrefix_tt<LinkTp, LinkT2, Value>& x,
-		      NodeWithPrefix_tt<LinkTp, LinkT2, Value>& y) {
-		std::swap(x.offset, y.offset);
-		std::swap(x.length, y.length);
-		std::swap(x.prefix, y.prefix);
-		std::swap(x.value , y.value );
-	//	boost::swap(x.value, y.value); // Arguments Dependent Lookup
-	}
-}
 
 // LinkTp is also offset-type
 template<class LinkTp, class Value, class ValuePlace>
@@ -2844,6 +2850,8 @@ public:
 };
 #endif
 
+} // namespace nark
+
 ///////////////////////////////////////////////////////////////////////////////
 
 namespace std { // for std::swap
@@ -2857,8 +2865,8 @@ template< class Value
 		, class HashTp
 		>
 void
-swap(hash_strmap<Value, HashFunc, KeyEqual, ValuePlace, CopyStrategy, LinkTp, HashTp> &x,
-	 hash_strmap<Value, HashFunc, KeyEqual, ValuePlace, CopyStrategy, LinkTp, HashTp> &y)
+swap(nark::hash_strmap<Value, HashFunc, KeyEqual, ValuePlace, CopyStrategy, LinkTp, HashTp> &x,
+	 nark::hash_strmap<Value, HashFunc, KeyEqual, ValuePlace, CopyStrategy, LinkTp, HashTp> &y)
 {
 	x.swap(y);
 }
@@ -2873,14 +2881,13 @@ template< class Key
 		, class HashTp
 		>
 void
-swap(fast_hash_strmap<Key, Value, HashFunc, KeyEqual, ValuePlace, CopyStrategy, LinkTp, HashTp> &x,
-	 fast_hash_strmap<Key, Value, HashFunc, KeyEqual, ValuePlace, CopyStrategy, LinkTp, HashTp> &y)
+swap(nark::fast_hash_strmap<Key, Value, HashFunc, KeyEqual, ValuePlace, CopyStrategy, LinkTp, HashTp> &x,
+	 nark::fast_hash_strmap<Key, Value, HashFunc, KeyEqual, ValuePlace, CopyStrategy, LinkTp, HashTp> &y)
 {
 	x.swap(y);
 }
 
 } // namespace std
-
 
 #endif // __nark_fast_hash_strmap2__
 

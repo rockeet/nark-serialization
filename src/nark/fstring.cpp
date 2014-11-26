@@ -2,6 +2,8 @@
 #include "hash_strmap.hpp"
 //#include <ostream>
 
+namespace nark {
+
 std::string operator+(fstring x, fstring y) {
 	std::string z;
 	z.reserve(x.n + y.n);
@@ -84,3 +86,5 @@ nark_fstrstr(const uint16_t* haystack, size_t haystack_len
 #endif
 	return NULL;
 }
+
+} // namespace nark

@@ -10,6 +10,8 @@
 #include <stdint.h> // for uint16_t
 #endif
 
+namespace nark {
+
 // 'Offset' could be a struct which contains offset as a field
 template<class Offset>
 struct default_offset_op {
@@ -264,9 +266,12 @@ typedef basic_fstrvec<wchar_t, unsigned long> wfstrvecl;
 typedef basic_fstrvec<uint16_t, unsigned int > fstrvec16;
 typedef basic_fstrvec<uint16_t, unsigned long> fstrvec16l;
 
+} // namespace nark
+
 namespace std {
 	template<class Char, class Offset>
-	void swap(basic_fstrvec<Char, Offset>& x, basic_fstrvec<Char, Offset>& y)
+	void swap(nark::basic_fstrvec<Char, Offset>& x,
+			  nark::basic_fstrvec<Char, Offset>& y)
    	{ x.swap(y); }
 }
 

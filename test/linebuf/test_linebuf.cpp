@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 GetoptDone:
 	printf("delims=%s:\n", delims);
 	nark::LineBuf lb;
-	valvec<std::string> F;
+	nark::valvec<std::string> F;
 	while (lb.getline(stdin) >= 0) {
 		lb.chomp();
 		lb.split_by_all(delims, &F);
