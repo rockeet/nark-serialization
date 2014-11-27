@@ -1,6 +1,0 @@
-1	2	3	4
-a	b	c	d	e
-aa	bb	cc	dd	ee
-aa bb cc dd ee  
-  aa bb cc dd ee
-   aa  bb  cc  dd  ee
