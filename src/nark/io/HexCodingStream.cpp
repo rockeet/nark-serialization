@@ -1,7 +1,7 @@
 /* vim: set tabstop=4 : */
 #include "HexCodingStream.hpp"
 #include "DataInput.hpp"
-#include "../num_to_str.hpp"
+#include <nark/num_to_str.hpp>
 
 namespace nark {
 

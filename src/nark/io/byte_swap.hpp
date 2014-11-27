@@ -7,7 +7,7 @@
 # pragma warning(disable: 4127)
 #endif
 
-#include "byte_swap_impl.hpp"
+#include <nark/util/byte_swap_impl.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/typeof/typeof.hpp>
 #include <boost/static_assert.hpp>

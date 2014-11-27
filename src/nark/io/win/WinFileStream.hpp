@@ -8,7 +8,7 @@
 # pragma warning(disable: 4267)
 #endif
 
-#include "../util/refcount.hpp"
+#include <nark/util/refcount.hpp>
 #include "IOException.hpp"
 #include "IStream.hpp"
 

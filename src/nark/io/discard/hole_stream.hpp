@@ -11,7 +11,7 @@
 //#include <boost/current_function.hpp>
 //#include <boost/type_traits/integral_constant.hpp>
 
-#include "../stdtypes.hpp"
+#include <nark/stdtypes.hpp>
 //#include "IOException.hpp"
 
 namespace nark {

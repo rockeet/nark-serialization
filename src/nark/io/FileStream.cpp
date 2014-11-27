@@ -19,7 +19,7 @@
 #include "byte_io_impl.hpp"
 #include "var_int.hpp"
 
-#include "../num_to_str.hpp"
+#include <nark/num_to_str.hpp>
 #include <nark/util/autofree.hpp>
 
 namespace nark {

@@ -13,7 +13,7 @@
 #include <boost/current_function.hpp>
 #include "IOException.hpp"
 #include "MemStream.hpp"
-#include "../util/DataBuffer.hpp"
+#include <nark/util/DataBuffer.hpp>
 
 namespace nark {
 

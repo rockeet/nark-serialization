@@ -8,7 +8,7 @@
 
 #include <boost/config.hpp>
 #include <boost/static_assert.hpp>
-#include "../stdtypes.hpp"
+#include <nark/stdtypes.hpp>
 
 // should be the last #include
 #include <boost/type_traits/detail/bool_trait_def.hpp>

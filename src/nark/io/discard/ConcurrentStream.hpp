@@ -6,7 +6,7 @@
 # pragma once
 #endif
 
-#include "../stdtypes.hpp"
+#include <nark/stdtypes.hpp>
 #include <boost/thread/mutex.hpp>
 
 namespace nark {

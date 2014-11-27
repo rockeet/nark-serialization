@@ -6,7 +6,7 @@
 # pragma once
 #endif
 
-#include "../util/refcount.hpp"
+#include <nark/util/refcount.hpp>
 #include <boost/mpl/bool.hpp>
 #include <string.h>
 #include <stdarg.h>

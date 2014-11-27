@@ -2,7 +2,7 @@
 
 #include "DataIO_Exception.hpp"
 #include <stdio.h> // for sprintf
-#include "../num_to_str.hpp"
+#include <nark/num_to_str.hpp>
 
 namespace nark {
 

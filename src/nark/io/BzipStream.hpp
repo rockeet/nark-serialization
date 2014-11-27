@@ -8,8 +8,8 @@
 
 #include <stdio.h>
 
-#include "../stdtypes.hpp"
-#include "../util/refcount.hpp"
+#include <nark/stdtypes.hpp>
+#include <nark/util/refcount.hpp>
 #include "IOException.hpp"
 #include "IStream.hpp"
 

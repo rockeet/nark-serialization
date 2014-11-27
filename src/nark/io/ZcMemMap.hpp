@@ -10,7 +10,7 @@
 #include <assert.h>
 #include <string.h> // for memcpy
 
-#include "../stdtypes.hpp"
+#include <nark/stdtypes.hpp>
 #include "IStream.hpp"
 #include "ZeroCopy.hpp"
 

@@ -8,7 +8,7 @@
 
 #include <boost/mpl/bool.hpp>
 #include <stdio.h> // for getFILE
-#include "../stdtypes.hpp"
+#include <nark/stdtypes.hpp>
 
 namespace nark {
 

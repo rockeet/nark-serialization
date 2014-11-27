@@ -34,7 +34,7 @@
 #  error "ZLIB_VERNUM is not defined"
 #endif
 
-#include "../num_to_str.hpp"
+#include <nark/num_to_str.hpp>
 
 namespace nark {
 

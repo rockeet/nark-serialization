@@ -8,7 +8,7 @@
 
 #include <exception>
 #include <string>
-#include "../config.hpp"
+#include <nark/config.hpp>
 
 namespace nark {
 

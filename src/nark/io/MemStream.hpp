@@ -17,7 +17,7 @@
 #include <boost/mpl/bool.hpp>
 
 #include <nark/util/throw.hpp>
-#include "../stdtypes.hpp"
+#include <nark/stdtypes.hpp>
 #include "IOException.hpp"
 
 namespace nark {

@@ -6,10 +6,10 @@
 # pragma once
 #endif
 
-#include "../stdtypes.hpp"
+#include <nark/stdtypes.hpp>
 //#include "var_int.hpp"
 #include <boost/strong_typedef.hpp>
-#include "../pass_by_value.hpp"
+#include <nark/pass_by_value.hpp>
 
 namespace nark {
 

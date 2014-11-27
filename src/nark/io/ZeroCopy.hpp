@@ -12,7 +12,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <string>
-#include "../stdtypes.hpp"
+#include <nark/stdtypes.hpp>
 
 namespace nark {
 

@@ -19,9 +19,8 @@ ifneq "${err}" "0"
    $(error err = ${err} MAKEFILE_LIST = ${MAKEFILE_LIST}, PWD = ${PWD}, gen_sh = ${gen_sh} "${CXX}" ${COMPILER} ${BUILD_ROOT}/env.mk)
 endif
 
-BRAIN_DEAD_RE2_INC = -I3rdparty/re2/re2 -I3rdparty/re2/util
-
-FEBIRD_INC := -Isrc -I3rdparty/re2 ${BRAIN_DEAD_RE2_INC}
+FEBIRD_INC := -Isrc
+FEBIRD_INC += -I../nark-bone/src
 
 include ${BUILD_ROOT}/env.mk
 
@@ -102,6 +101,8 @@ ifeq (, $(findstring ${BOOST_LIB}, /usr/lib64 /usr/lib /usr/local/lib))
   override LIBS += -L${BOOST_LIB}
 endif
 
+override LIBS += -L../nark-bone/lib
+
 #override INCS += -I/usr/include
 
 LIBS += -L/usr/local/lib64 -L/usr/local/lib
@@ -109,9 +110,6 @@ LIBS += -L/usr/lib64 -L/usr/lib
 
 extf = -pie -fno-stack-protector
 #extf+=-fno-stack-protector-all
-ifeq "${RE2_CXX}" ""
-  RE2_CXX := ${CXX}
-endif
 override CFLAGS += ${extf}
 #override CFLAGS += -g3
 override CXXFLAGS += ${extf}
@@ -126,20 +124,9 @@ ifeq (, ${prefix})
 	endif
 endif
 
-c_src := \
-   $(wildcard src/nark/c/*.c) \
-   $(wildcard src/nark/c/*.cpp)
-
 zip_src := \
     src/nark/io/BzipStream.cpp \
 	src/nark/io/GzipStream.cpp
-
-thread_src := \
-   $(wildcard src/nark/thread/*.cpp)
-
-rpc_src := \
-   $(wildcard src/nark/inet/*.cpp) \
-   $(wildcard src/nark/rpc/*.cpp)
 
 core_src := \
    $(wildcard src/nark/*.cpp) \
@@ -179,7 +166,9 @@ alldep = $(addprefix ${rdir}/, $(addsuffix .dep, $(basename ${allsrc}))) \
 .PHONY : dbg rls
 dbg: ${DBG_TARGETS}
 rls: ${RLS_TARGETS}
-
+ 
+${core_d} : LIBS += -lnark-bone-d
+${core_r} : LIBS += -lnark-bone-d
 ${core_d} ${core_r} : LIBS += -lrt
 
 ${core_d}:${core_d_o}

@@ -13,7 +13,7 @@
 #include <boost/type_traits.hpp>
 #include <boost/static_assert.hpp>
 
-#include "../stdtypes.hpp"
+#include <nark/stdtypes.hpp>
 #include <nark/io/StreamBuffer.hpp>
 
 // 目前还未完成

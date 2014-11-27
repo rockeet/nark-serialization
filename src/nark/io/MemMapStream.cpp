@@ -2,7 +2,7 @@
 
 #include <assert.h>
 #include <string.h>
-#include "../num_to_str.hpp"
+#include <nark/num_to_str.hpp>
 #include <stdexcept>
 
 #include "MemMapStream.hpp"

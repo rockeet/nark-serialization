@@ -13,8 +13,8 @@
 #include <boost/static_assert.hpp>
 #include <boost/type_traits.hpp>
 
-#include "../stdtypes.hpp"
-#include "../pass_by_value.hpp"
+#include <nark/stdtypes.hpp>
+#include <nark/pass_by_value.hpp>
 
 #include "byte_swap.hpp"
 

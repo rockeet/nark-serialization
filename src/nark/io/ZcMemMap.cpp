@@ -7,7 +7,7 @@
 
 #include "ZcMemMap.hpp"
 #include "IOException.hpp"
-#include "../num_to_str.hpp"
+#include <nark/num_to_str.hpp>
 
 using namespace std;
 

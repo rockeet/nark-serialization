@@ -33,14 +33,14 @@
 	#error must define byte endian
 #endif
 
-#include "../pass_by_value.hpp"
+#include <nark/pass_by_value.hpp>
 #include "byte_swap.hpp"
 #include "DataIO_Basic.hpp"
 #include "DataIO_Version.hpp"
 #include "DataIO_Tuple.hpp"
 #include "DataIO_Exception.hpp"
 #include "var_int.hpp"
-#include "../valvec.hpp"
+#include <nark/valvec.hpp>
 
 #if !defined(BOOST_BIG_ENDIAN) && !defined(BOOST_LITTLE_ENDIAN)
 # error must define byte endian
