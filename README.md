@@ -109,7 +109,7 @@ int main(int argc, char\* argv[]) {
     input & d1 & d2 & d3 & sd1 & sd2; // loading, '&' is an alias of '>>'
 }
 ```
-Is it a magic? I wrote the first version of nark-serialization at July 2006, three months later, I write [nark-rpc](/rockeet/nark-rpc) on top of nark-serialization.
+Is it a magic? I wrote the first version of nark-serialization at July 2006, three months later, I write [nark-rpc](https://github.com/rockeet/nark-rpc) on top of nark-serialization.
 
 ## More
 
