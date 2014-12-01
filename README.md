@@ -106,10 +106,11 @@ int main(int argc, char\* argv[]) {
     output & d1 & d2 & d3 & sd1 & sd2; // saving, '&' is an alias of '<<'
 
     input = output.head(); // shallow copy, input is the written part of output 
-
     input & d1 & d2 & d3 & sd1 & sd2; // loading, '&' is an alias of '>>'
 }
 ```
+Is it a magic? I wrote the first version of nark-serialization at July 2006, three months later, I write [nark-rpc](/rockeet/nark-rpc) on top of nark-serialization.
+
 ## More
 
 To be done
