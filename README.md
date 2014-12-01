@@ -84,8 +84,8 @@ struct SysData2 {
 DATA_IO_LOAD_SAVE_EV(SysData2, &a &b& vmg.since(2, c))
 
 int main(int argc, char* argv[]) {
-    PortableDataOutput<AutoGrownMemIO> output;
-    PortableDataInput<MemIO> input;
+    PortableDataOutput<AutoGrownMemIO> output; // 'Portable' is BigEndian
+    PortableDataInput<MemIO> input; // 'Portable' is BigEndian
 
     MyData1 d1;
     // set d1 values
