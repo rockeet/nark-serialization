@@ -128,38 +128,38 @@ zip_src := \
     src/nark/io/BzipStream.cpp \
 	src/nark/io/GzipStream.cpp
 
-core_src := \
+serialization_src := \
    $(wildcard src/nark/*.cpp) \
    $(wildcard src/nark/io/*.cpp) \
    $(wildcard src/nark/util/*.cpp) \
    ${obsoleted_src}
 
-core_src := $(filter-out ${zip_src}, ${core_src})
+serialization_src := $(filter-out ${zip_src}, ${serialization_src})
 
 #function definition
-#@param:${1} -- targets var prefix, such as bdb_util | core
+#@param:${1} -- targets var prefix, such as bdb_util | serialization
 #@param:${2} -- build type: d | r
 objs = $(addprefix ${${2}dir}/, $(addsuffix .o, $(basename ${${1}_src})))
 
 re2_d_o := $(call objs,re2,d)
 re2_r_o := $(call objs,re2,r)
 
-core_d_o := $(call objs,core,d)
-core_r_o := $(call objs,core,r)
-core_d := lib/libnark-core-${COMPILER}-d${DLL_SUFFIX}
-core_r := lib/libnark-core-${COMPILER}-r${DLL_SUFFIX}
-static_core_d := lib/libnark-core-${COMPILER}-d.a
-static_core_r := lib/libnark-core-${COMPILER}-r.a
+serialization_d_o := $(call objs,serialization,d)
+serialization_r_o := $(call objs,serialization,r)
+serialization_d := lib/libnark-serialization-${COMPILER}-d${DLL_SUFFIX}
+serialization_r := lib/libnark-serialization-${COMPILER}-r${DLL_SUFFIX}
+static_serialization_d := lib/libnark-serialization-${COMPILER}-d.a
+static_serialization_r := lib/libnark-serialization-${COMPILER}-r.a
 
-ALL_TARGETS = core
-DBG_TARGETS = ${core_d}
-RLS_TARGETS = ${core_r}
+ALL_TARGETS = serialization
+DBG_TARGETS = ${serialization_d}
+RLS_TARGETS = ${serialization_r}
 
-.PHONY : core
+.PHONY : serialization
 
-core: ${core_d} ${core_r} ${static_core_d} ${static_core_r}
+serialization: ${serialization_d} ${serialization_r} ${static_serialization_d} ${static_serialization_r}
 
-allsrc = ${core_src}
+allsrc = ${serialization_src}
 alldep = $(addprefix ${rdir}/, $(addsuffix .dep, $(basename ${allsrc}))) \
          $(addprefix ${ddir}/, $(addsuffix .dep, $(basename ${allsrc})))
 
@@ -167,14 +167,14 @@ alldep = $(addprefix ${rdir}/, $(addsuffix .dep, $(basename ${allsrc}))) \
 dbg: ${DBG_TARGETS}
 rls: ${RLS_TARGETS}
  
-${core_d} : LIBS += -lnark-bone-d
-${core_r} : LIBS += -lnark-bone-d
-${core_d} ${core_r} : LIBS += -lrt
+${serialization_d} : LIBS += -lnark-bone-d
+${serialization_r} : LIBS += -lnark-bone-d
+${serialization_d} ${serialization_r} : LIBS += -lrt
 
-${core_d}:${core_d_o}
-${core_r}:${core_r_o}
-${static_core_d}:${core_d_o}
-${static_core_r}:${core_r_o}
+${serialization_d}:${serialization_d_o}
+${serialization_r}:${serialization_r_o}
+${static_serialization_d}:${serialization_d_o}
+${static_serialization_r}:${serialization_r_o}
 
 %${DLL_SUFFIX}:
 	@echo "----------------------------------------------------------------------------------"
@@ -200,7 +200,7 @@ endif
 	@${AR} rcs $@ $(filter %.o,$^)
 
 .PHONY : install
-install : core
+install : serialization
 	cp lib/* ${prefix}/lib/
 
 .PHONY : clean
