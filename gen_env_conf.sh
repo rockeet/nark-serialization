@@ -32,7 +32,7 @@ do
 		else
 			DIR_LIB64=${dir}/lib
 		fi
-		WORD_BITS=`arch | sed 's/.*_\(64\|32\)/\1/'`
+		WORD_BITS=`uname -m | sed 's/.*_\(64\|32\)/\1/'`
 		DIR_LIB="DIR_LIB${WORD_BITS}"
 		BOOST_VERSION=`sed -n '/define\s\+BOOST_VERSION/s/^.*BOOST_VERSION\s\+\([0-9]*\).*/\1/p' $vf`
 		BOOST_LIB_VERSION=`sed -n '/define\s\+BOOST_LIB_VERSION/s/.*BOOST_LIB_VERSION[^"]*"\([0-9_.]*\)".*/\1/p' $vf`
