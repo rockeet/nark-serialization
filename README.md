@@ -111,6 +111,25 @@ int main(int argc, char* argv[]) {
 ```
 Is it a magic? I wrote the first version of nark-serialization at July 2006, three months later, I wrote [nark-rpc](https://github.com/rockeet/nark-rpc) on top of nark-serialization.
 
+## Prerequisite
+  * boost-1.41 or newer
+    * both `nark-bone` and `nark-serialization` use boost as header-only library
+    * so boost is not required to be compiled first
+  * [nark-bone](https://github.com/rockeet/nark-bone)
+    * `nark-bone` should be in the same directory as `nark-serialization`
+    * `nark-bone` should be compiled before `nark-serialization`
+
+## Compile
+```bash
+$ cd path/to/nark-bone
+$ make # compile nark-bone
+$ cd path/to/nark-serialization
+$ make # compile nark-serialization
+$ cd test
+$ make # compile test and benchmark
+$ rls/bench.exe # run benchmark
+```
+
 ## More
 
 To be done
