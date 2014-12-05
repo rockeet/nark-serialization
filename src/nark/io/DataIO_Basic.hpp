@@ -44,6 +44,12 @@ namespace nark {
 	#error "must define BOOST_LITTLE_ENDIAN or BOOST_BIG_ENDIAN"
 #endif
 
+// When DataIO_is_dump<DataIO, Type> is true, it means:
+//   1. Type can be memcpy'ed
+//   2. Type may need byte-swap for fix endian: When Read/Write BigEndian on
+//      LittleEndian machine, DataIO_is_dump is true, the data will be
+//      byte-swaped before dump-write or after dump-read
+
 typedef boost::mpl::true_  IsDump_true;
 typedef boost::mpl::false_ IsDump_false;
 
@@ -91,7 +97,7 @@ typedef boost::mpl::false_ IsDump_false;
     #define DATA_IO_GEN_DUMP_TYPE_TRAITS(Class, Members) \
       template<class DataIO> \
       auto _M_Deduce_DataIO_is_realdump(DataIO*) { \
-        return DataIO_is_realdump<DataIO,Class,0,true>((Class*)NULL)Members;\
+        return nark::DataIO_is_realdump<DataIO,Class,0,true>((Class*)NULL)Members;\
       }
 //	#define HERE_FOR_GCC_FRIEND_AUTO_WORK_AROUND auto
 	#define HERE_FOR_GCC_FRIEND_AUTO_WORK_AROUND(Derived) \

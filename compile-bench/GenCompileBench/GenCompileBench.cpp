@@ -10,7 +10,7 @@ using namespace std;
 
 void gen_pod_serialize(FILE* fp, const char* prefix, const vector<string>& types)
 {
-	for (int i = 0; i != types.size(); ++i)
+	for (int i = 0; i != (int)types.size(); ++i)
 	{
 		fprintf(fp, " & a%d", i);
 	}
@@ -20,7 +20,7 @@ void gen_pod(FILE* fp, const char* prefix, int no, const vector<string>& types)
 {
 	fprintf(fp, "struct %s_pod_%d\n", prefix, no);
 	fprintf(fp, "{\n");
-	for (int i = 0; i != types.size(); ++i)
+	for (int i = 0; i != (int)types.size(); ++i)
 	{
 		fprintf(fp, "   %s a%d;\n", types[i].c_str(), i);
 	}
@@ -34,7 +34,7 @@ void gen_pod(FILE* fp, const char* prefix, int no, const vector<string>& types)
 void gen_complex_serialize(FILE* fp, const char* prefix, const vector<string>& types)
 {
 	fprintf(fp, "\n");
-	for (int i = 0; i != types.size(); ++i)
+	for (int i = 0; i != (int)types.size(); ++i)
 	{
 		fprintf(fp, "       & map_%s_%d\n", types[i].c_str(), i);
 		fprintf(fp, "       & multimap_%s_%d\n", types[i].c_str(), i);
@@ -50,7 +50,7 @@ void gen_complex(FILE* fp, const char* prefix, int no, const vector<string>& typ
 {
 	fprintf(fp, "struct %s_complex_%d\n", prefix, no);
 	fprintf(fp, "{\n");
-	for (int i = 0; i != types.size(); ++i)
+	for (int i = 0; i != (int)types.size(); ++i)
 	{
 		fprintf(fp, "   std::map<int, %s > map_%s_%d;\n", types[i].c_str(), types[i].c_str(), i);
 		fprintf(fp, "   std::multimap<int, %s > multimap_%s_%d;\n", types[i].c_str(), types[i].c_str(), i);

@@ -90,12 +90,16 @@
 	// endian of float types are same as corresponding size integer's
 	MyType& operator<<(const float x) {
 		BOOST_STATIC_ASSERT(sizeof(float) == 4);
-		*this << *(const uint32_t*)(&x);
+		uint32_t ix;
+		memcpy(&ix, &x, 4);
+		*this << ix;
 		return *this;
 	}
 	MyType& operator<<(const double x) {
 		BOOST_STATIC_ASSERT(sizeof(double) == 8);
-		*this << *(const uint64_t*)(&x);
+		uint64_t ix;
+		memcpy(&ix, &x, 8);
+		*this << ix;
 		return *this;
 	}
 	MyType& operator<<(const long double x) {

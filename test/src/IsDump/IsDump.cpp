@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#undef NDEBUG
 #include <nark/io/DataIO.hpp>
 #include <nark/io/MemStream.hpp>
 //#include <nark/io/DataIO_Dump.hpp>
@@ -18,10 +18,9 @@ struct Dumpable2
 	unsigned char a, b, c, d;
 	DATA_IO_LOAD_SAVE(Dumpable2, &a &b &c &d)
 };
-//Gen_DataIO_IsDump_True(Dumpable2)
-// namespace nark {
-// DataIO_IsDump_TypeTrue1(Dumpable2)
-// }
+namespace nark {
+	DataIO_IsDump_TypeTrue1(Dumpable2)
+}
 
 template<class Dio, class T>
 nark::DataIO_is_dump<Dio, T>
@@ -65,19 +64,19 @@ int main(int argc, char* argv[])
 	assert(DataIO_IsDump(&oNative, &u64).value);
 	assert(DataIO_IsDump(&oNative, &u32).value);
 
-	assert( DataIO_IsDump(&iPortable, &c ).value);
-	assert( DataIO_IsDump(&iPortable, &u8 ).value);
-	assert(!DataIO_IsDump(&iPortable, &u16).value);
-	assert(!DataIO_IsDump(&iPortable, &u32).value);
-	assert(!DataIO_IsDump(&iPortable, &u64).value);
-	assert(!DataIO_IsDump(&iPortable, &u32).value);
+	assert(DataIO_IsDump(&iPortable, &c ).value);
+	assert(DataIO_IsDump(&iPortable, &u8 ).value);
+	assert(DataIO_IsDump(&iPortable, &u16).value);
+	assert(DataIO_IsDump(&iPortable, &u32).value);
+	assert(DataIO_IsDump(&iPortable, &u64).value);
+	assert(DataIO_IsDump(&iPortable, &u32).value);
 
-	assert( DataIO_IsDump(&oPortable, &c ).value);
-	assert( DataIO_IsDump(&oPortable, &u8 ).value);
-	assert(!DataIO_IsDump(&oPortable, &u16).value);
-	assert(!DataIO_IsDump(&oPortable, &u32).value);
-	assert(!DataIO_IsDump(&oPortable, &u64).value);
-	assert(!DataIO_IsDump(&oPortable, &u32).value);
+	assert(DataIO_IsDump(&oPortable, &c ).value);
+	assert(DataIO_IsDump(&oPortable, &u8 ).value);
+	assert(DataIO_IsDump(&oPortable, &u16).value);
+	assert(DataIO_IsDump(&oPortable, &u32).value);
+	assert(DataIO_IsDump(&oPortable, &u64).value);
+	assert(DataIO_IsDump(&oPortable, &u32).value);
 
 	assert(DataIO_IsDump(&iNative, &s8 ).value);
 	assert(DataIO_IsDump(&iNative, &s16).value);
@@ -91,17 +90,17 @@ int main(int argc, char* argv[])
 	assert(DataIO_IsDump(&oNative, &s64).value);
 	assert(DataIO_IsDump(&oNative, &s32).value);
 
-	assert( DataIO_IsDump(&iPortable, &s8 ).value);
-	assert(!DataIO_IsDump(&iPortable, &s16).value);
-	assert(!DataIO_IsDump(&iPortable, &s32).value);
-	assert(!DataIO_IsDump(&iPortable, &s64).value);
-	assert(!DataIO_IsDump(&iPortable, &s32).value);
+	assert(DataIO_IsDump(&iPortable, &s8 ).value);
+	assert(DataIO_IsDump(&iPortable, &s16).value);
+	assert(DataIO_IsDump(&iPortable, &s32).value);
+	assert(DataIO_IsDump(&iPortable, &s64).value);
+	assert(DataIO_IsDump(&iPortable, &s32).value);
 
-	assert( DataIO_IsDump(&oPortable, &s8 ).value);
-	assert(!DataIO_IsDump(&oPortable, &s16).value);
-	assert(!DataIO_IsDump(&oPortable, &s32).value);
-	assert(!DataIO_IsDump(&oPortable, &s64).value);
-	assert(!DataIO_IsDump(&oPortable, &s32).value);
+	assert(DataIO_IsDump(&oPortable, &s8 ).value);
+	assert(DataIO_IsDump(&oPortable, &s16).value);
+	assert(DataIO_IsDump(&oPortable, &s32).value);
+	assert(DataIO_IsDump(&oPortable, &s64).value);
+	assert(DataIO_IsDump(&oPortable, &s32).value);
 
 	std::pair<uint16_t, uint16_t> p16_16;
 	std::pair<uint16_t, uint32_t> p16_32; // has padding, so can not dump

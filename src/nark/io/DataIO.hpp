@@ -201,9 +201,11 @@ DataIO_IsDump_TypeTrue2(PortableNoVarInt, var_int64_t)
 		out.ensureWrite(&x, sizeof(Class));				\
 	}													\
 	Friend												\
+	nark::												\
 	ByteSwap_false Deduce_DataIO_need_bswap(Class*);	\
 	template<class DataIO>                              \
 	Friend												\
+	nark::												\
 	IsDump_true Deduce_DataIO_is_dump(DataIO*, Class*);
 
 #else
