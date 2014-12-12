@@ -112,7 +112,7 @@ int main(int argc, char* argv[]) {
 Is it a magic? I wrote the first version of nark-serialization at July 2006, three months later, I wrote [nark-rpc](https://github.com/rockeet/nark-rpc) on top of nark-serialization.
 
 ## Prerequisite
-  * boost-1.41 or newer
+  * [boost-1.41 or newer](http://sourceforge.net/projects/boost/)
     * both `nark-bone` and `nark-serialization` use boost as header-only library
     * so boost is not required to be compiled first
   * [nark-bone](https://github.com/rockeet/nark-bone)
