@@ -13,6 +13,12 @@ An easy, fast, small, portable C++ object serialization framework
   1. Optional serialization version control
   1. More and more...
 
+## Bench Mark
+I have written a [benchmark vs boost-serialization](http://nark.cc/p/?p=65), but have not written benchmarks with other serilization libraries.
+Fortunately, there is a [benchmark of many serialization library](https://github.com/thekvs/cpp-serializers), including boost-serialization.
+
+You can run benchmark of [nark-serialization vs boost-serialization](#compile) yourself.
+
 ## Quick Start
 
 nark-serialization is powerful, but using it is very simple:
