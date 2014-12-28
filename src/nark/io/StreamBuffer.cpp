@@ -1,4 +1,4 @@
-/* vim: set tabstop=4 : */
+﻿/* vim: set tabstop=4 : */
 #include <stdexcept>
 #include "StreamBuffer.hpp"
 #include "IStreamWrapper.hpp"

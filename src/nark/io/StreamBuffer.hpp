@@ -1,4 +1,4 @@
-/* vim: set tabstop=4 : */
+﻿/* vim: set tabstop=4 : */
 #ifndef __nark_io_StreamBuffer_h__
 #define __nark_io_StreamBuffer_h__
 

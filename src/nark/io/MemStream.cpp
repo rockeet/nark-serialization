@@ -1,4 +1,4 @@
-/* vim: set tabstop=4 : */
+﻿/* vim: set tabstop=4 : */
 #include "MemStream.hpp"
 #include <stdlib.h>
 #include <algorithm>

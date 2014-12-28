@@ -1,4 +1,4 @@
-/* vim: set tabstop=4 : */
+﻿/* vim: set tabstop=4 : */
 #ifndef __nark_io_AutoGrownMemIO_h__
 #define __nark_io_AutoGrownMemIO_h__
 
@@ -22,8 +22,8 @@
 
 namespace nark {
 
-FEBIRD_DLL_EXPORT void throw_EndOfFile (const char* func, size_t want, size_t available) nark_no_return;
-FEBIRD_DLL_EXPORT void throw_OutOfSpace(const char* func, size_t want, size_t available) nark_no_return;
+FEBIRD_DLL_EXPORT nark_no_return void throw_EndOfFile (const char* func, size_t want, size_t available);
+FEBIRD_DLL_EXPORT nark_no_return void throw_OutOfSpace(const char* func, size_t want, size_t available);
 
 //! MinMemIO
 //! +--MemIO
