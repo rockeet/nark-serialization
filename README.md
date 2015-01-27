@@ -87,7 +87,7 @@ struct SysData2 {
     unsigned b;
     string c;
 };
-DATA_IO_LOAD_SAVE_EV(SysData2, &a &b& vmg.since(2, c))
+DATA_IO_LOAD_SAVE_EV(SysData2, &a &b &vmg.since(2, c))
 
 int main(int argc, char* argv[]) {
     PortableDataOutput<AutoGrownMemIO> output; // 'Portable' is BigEndian
@@ -109,6 +109,7 @@ int main(int argc, char* argv[]) {
     input = output.head(); // shallow copy, input is the written part of output
     input >> d1 >> d2 >> d3 >> sd1 >> sd2; // loading
 
+	output.rewind(); // rewind the write pointer
     output & d1 & d2 & d3 & sd1 & sd2; // saving, '&' is an alias of '<<'
 
     input = output.head(); // shallow copy, input is the written part of output 

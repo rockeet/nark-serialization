@@ -166,6 +166,10 @@ void AutoGrownMemIO::clone(const AutoGrownMemIO& src)
 void AutoGrownMemIO::resize(size_t newsize)
 {
 	assert(tell() <= newsize);
+	if (newsize < tell()) {
+		THROW_STD(length_error,
+			"newsize=%zd is less than tell()=%zd", newsize, tell());
+	}
 
 #ifdef _MSC_VER
 	size_t oldsize = size();
@@ -239,6 +243,35 @@ void AutoGrownMemIO::growAndWriteByte(byte b)
 	using namespace std;
 	resize(max(2u * size(), (size_t)64u));
 	*m_pos++ = b;
+}
+
+/**
+ * shrink allocated memory to fit this->tell()
+ */
+void AutoGrownMemIO::shrink_to_fit() {
+	if (NULL == m_beg) {
+		assert(NULL == m_pos);
+		assert(NULL == m_end);
+	}
+	else {
+		assert(m_beg <= m_pos);
+		assert(m_pos <= m_end);
+		size_t realsize = m_pos - m_beg;
+		if (0 == realsize) {
+			::free(m_beg);
+			m_beg = m_end = m_pos = NULL;
+		}
+		else {
+			byte* newbeg = (byte*)realloc(m_beg, realsize);
+			assert(NULL != newbeg);
+			if (NULL == newbeg) {
+				// realloc should always success on shrink
+				abort();
+			}
+			m_end = m_pos = newbeg + realsize;
+			m_beg = newbeg;
+		}
+	}
 }
 
 size_t AutoGrownMemIO::printf(const char* format, ...)

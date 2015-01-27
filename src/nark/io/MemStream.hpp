@@ -79,7 +79,11 @@ public:
 	//! caller can use this function to determine an offset difference
 	ptrdiff_t diff(const void* start) const throw() { return m_pos - (byte*)start; }
 
-	void skip(ptrdiff_t diff) throw() {	m_pos += diff; }
+	byte* skip(ptrdiff_t diff) throw() {
+		byte* old = m_pos;
+		m_pos += diff;
+		return old;
+	}
 
 	byte uncheckedReadByte() { return *m_pos++; }
 	void uncheckedWriteByte(byte b) { *m_pos++ = b; }
@@ -156,15 +160,17 @@ public:
 	 @brief 向前跳过 @a diff 个字节
 	 @a 可以是负数，表示向后跳跃
 	 */
-	void skip(ptrdiff_t diff) {
+	byte* skip(ptrdiff_t diff) {
 		assert(m_pos + diff <= m_end);
+		byte* old = m_pos;
 		if (nark_likely(m_pos + diff <= m_end))
 			m_pos += diff;
 		else {
-			THROW_STD(invalid_argument
-				, "diff=%ld is too large, end-pos=%ld"
+			THROW_STD(out_of_range
+				, "diff=%ld, end-pos=%ld"
 				, long(diff), long(m_end-m_pos));
 		}
+		return old;
 	}
 	ptrdiff_t buf_remain_bytes() const { return m_end - m_pos; }
 
@@ -224,6 +230,20 @@ public:
 	size_t size() const throw() { return m_end-m_beg; }
 
 	size_t tell() const throw() { return m_pos-m_beg; }
+
+	byte* skip(ptrdiff_t diff) {
+		assert(m_pos + diff <= m_end);
+		assert(m_pos + diff >= m_beg);
+		byte* old = m_pos;
+		if (nark_likely(m_pos + diff <= m_end && m_pos + diff >= m_beg))
+			m_pos += diff;
+		else {
+			THROW_STD(out_of_range
+				, "diff=%ld, pos-beg=%ld, end-pos=%ld"
+				, long(diff), long(m_pos-m_beg), long(m_end-m_pos));
+		}
+		return old;
+	}
 
 	void rewind() throw() { m_pos = m_beg; }
 	void seek(ptrdiff_t newPos);
@@ -322,6 +342,15 @@ public:
 	}
 
 	void swap(AutoGrownMemIO& that) { SeekableMemIO::swap(that); }
+	void shrink_to_fit();
+
+	byte* release() {
+		byte* tmp = this->m_beg;
+		this->m_beg = NULL;
+		this->m_end = NULL;
+		this->m_pos = NULL;
+		return tmp;
+	}
 
 	template<class DataIO>
 	friend
