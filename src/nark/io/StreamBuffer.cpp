@@ -41,7 +41,7 @@ IOBufferBase::~IOBufferBase()
 
 void IOBufferBase::initbuf(size_t capacity)
 {
-#ifdef _DEBUG
+#if defined(_DEBUG) || !defined(NDEBUG)
 // raise assert when debug
 	assert(0 == m_beg);
 	m_beg = (byte*)malloc(capacity);
@@ -363,11 +363,11 @@ OutputBufferBase<BaseClass>::~OutputBufferBase()
 template<class BaseClass>
 void OutputBufferBase<BaseClass>::flush_buffer()
 {
-	if (nark_unlikely(0 == m_beg)) // unbuffered
+	if (nark_unlikely(NULL == m_beg)) // unbuffered
 	{
 		return;
 	}
-	if (nark_unlikely(0 == m_os))
+	if (nark_unlikely(NULL == m_os))
 	{
 		string_appender<> oss;
 		oss << "\"" << BOOST_CURRENT_FUNCTION << "\""

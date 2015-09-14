@@ -79,6 +79,8 @@ public:
 	size_t bufsize() const { return m_end-m_beg; }
 	size_t bufcapacity() const { return m_capacity; }
 
+	void resetbuf() { m_pos = m_end = m_beg; }
+
 	void risk_set_bufpos(size_t pos) {
 		assert(pos <= size_t(m_end - m_beg));
 	   	m_pos = m_beg + pos;
@@ -93,6 +95,8 @@ public:
 	//!
 	//! most for m_is/m_os == 0
 	void set_bufeof(size_t eofpos);
+
+	bool is_bufeof() const { return m_pos == m_end; }
 
 	ptrdiff_t buf_remain_bytes() const { return m_end - m_pos; }
 
@@ -122,7 +126,7 @@ class FEBIRD_DLL_EXPORT InputBuffer : public IOBufferBase
 public:
 	typedef boost::mpl::false_ is_seekable;
 
-	explicit InputBuffer(IInputStream* stream = 0)
+	explicit InputBuffer(IInputStream* stream = NULL)
 		: m_is(stream)
 	{
 	}
@@ -212,7 +216,7 @@ class FEBIRD_DLL_EXPORT OutputBufferBase : public BaseClass
 public:
 	typedef boost::mpl::false_ is_seekable;
 
-	explicit OutputBufferBase(IOutputStream* os = 0) : m_os(os)
+	explicit OutputBufferBase(IOutputStream* os = NULL) : m_os(os)
 	{
 	}
 	virtual ~OutputBufferBase();
@@ -304,7 +308,7 @@ protected:
 class FEBIRD_DLL_EXPORT OutputBuffer : public OutputBufferBase<IOBufferBase>
 {
 public:
-	explicit OutputBuffer(IOutputStream* os = 0)
+	explicit OutputBuffer(IOutputStream* os = NULL)
 	   	: OutputBufferBase<IOBufferBase> (os)
 	{ }
 
@@ -334,6 +338,8 @@ public:
 		m_seekable = 0;
 		m_stream_pos = 0;
 	}
+
+	virtual ~SeekableBufferBase() {}
 
 	template<class Stream>
 	void attach(Stream* stream)

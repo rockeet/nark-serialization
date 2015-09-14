@@ -30,7 +30,7 @@ inline void DataIO_loadObject(DataIO& dio, boost::tuples::cons<T1, boost::tuples
 }
 
 template<class DataIO, class T1>
-inline void DataIO_loadObject(DataIO& dio, boost::tuples::null_type&)
+inline void DataIO_loadObject(DataIO&, boost::tuples::null_type&)
 { }
 
 template<class DataIO, class T1, class T2>
@@ -64,7 +64,7 @@ inline void DataIO_saveObject(DataIO& dio, const boost::tuples::cons<T1, boost::
 }
 
 template<class DataIO, class T1>
-inline void DataIO_saveObject(DataIO& dio, const boost::tuples::null_type&)
+inline void DataIO_saveObject(DataIO&, const boost::tuples::null_type&)
 {  }
 
 template<class DataIO, class T1, class T2>

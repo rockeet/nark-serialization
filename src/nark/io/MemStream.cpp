@@ -166,6 +166,10 @@ void AutoGrownMemIO::clone(const AutoGrownMemIO& src)
 void AutoGrownMemIO::resize(size_t newsize)
 {
 	assert(tell() <= newsize);
+	if (newsize < tell()) {
+		THROW_STD(length_error,
+			"newsize=%zd is less than tell()=%zd", newsize, tell());
+	}
 
 #ifdef _MSC_VER
 	size_t oldsize = size();
@@ -186,6 +190,14 @@ void AutoGrownMemIO::resize(size_t newsize)
 		throw std::bad_alloc();
 #endif
 	}
+}
+
+void AutoGrownMemIO::grow(size_t nGrow) {
+	size_t oldsize = m_end - m_beg;
+	size_t newsize = oldsize + nGrow;
+	size_t newcap = std::max<size_t>(32, oldsize);
+	while (newcap < newsize) newcap *= 2;
+	resize(newcap);
 }
 
 /**
@@ -241,6 +253,35 @@ void AutoGrownMemIO::growAndWriteByte(byte b)
 	*m_pos++ = b;
 }
 
+/**
+ * shrink allocated memory to fit this->tell()
+ */
+void AutoGrownMemIO::shrink_to_fit() {
+	if (NULL == m_beg) {
+		assert(NULL == m_pos);
+		assert(NULL == m_end);
+	}
+	else {
+		assert(m_beg <= m_pos);
+		assert(m_pos <= m_end);
+		size_t realsize = m_pos - m_beg;
+		if (0 == realsize) {
+			::free(m_beg);
+			m_beg = m_end = m_pos = NULL;
+		}
+		else {
+			byte* newbeg = (byte*)realloc(m_beg, realsize);
+			assert(NULL != newbeg);
+			if (NULL == newbeg) {
+				// realloc should always success on shrink
+				abort();
+			}
+			m_end = m_pos = newbeg + realsize;
+			m_beg = newbeg;
+		}
+	}
+}
+
 size_t AutoGrownMemIO::printf(const char* format, ...)
 {
 	va_list ap;
@@ -285,7 +326,7 @@ size_t AutoGrownMemIO::vprintf(const char* format, va_list ap)
 
 ///////////////////////////////////////////////////////
 //
-#ifdef _GNU_SOURCE
+#if defined(__GLIBC__) || defined(__CYGWIN__)
 
 ssize_t
 MemIO_FILE_read(void *cookie, char *buf, size_t size)
@@ -361,7 +402,7 @@ FILE* AutoGrownMemIO::forFILE(const char* mode)
 	return fp;
 }
 
-#endif // _GNU_SOURCE
+#endif
 
 #define STREAM_READER MinMemIO
 #define STREAM_WRITER MinMemIO

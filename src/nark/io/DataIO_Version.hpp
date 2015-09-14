@@ -8,16 +8,16 @@
 
 #include <nark/stdtypes.hpp>
 //#include "var_int.hpp"
-#include <boost/strong_typedef.hpp>
+#include <boost/serialization/strong_typedef.hpp>
 #include <nark/pass_by_value.hpp>
 
 namespace nark {
 
 BOOST_STRONG_TYPEDEF(uint32_t, serialize_version_t)
 
-//! ¿ÉÒÔÔÚ DATA_IO_VERSIONED_LOAD_SAVE ºêÖĞÊ¹ÓÃ
+//! å¯ä»¥åœ¨ DATA_IO_VERSIONED_LOAD_SAVE å®ä¸­ä½¿ç”¨
 //!
-//! ÓÃÀ´ÉùÃ÷Ö»ĞòÁĞ»¯¸ü¸ß version µÄ¶ÔÏó³ÉÔ±
+//! ç”¨æ¥å£°æ˜åªåºåˆ—åŒ–æ›´é«˜ version çš„å¯¹è±¡æˆå‘˜
 //! @see DataIO_version_manager::since
 //!
 template<class Class>
@@ -52,9 +52,9 @@ public:
 	}
 };
 
-//! ¿ÉÒÔÔÚ DATA_IO_VERSIONED_LOAD_SAVE ºêÖĞÊ¹ÓÃ
+//! å¯ä»¥åœ¨ DATA_IO_VERSIONED_LOAD_SAVE å®ä¸­ä½¿ç”¨
 //!
-//! µ±ÔØÈë¶ÔÏóÊ±£¬ÓÃÀ´°Ñ version ¿½±´µ½³ÉÔ±
+//! å½“è½½å…¥å¯¹è±¡æ—¶ï¼Œç”¨æ¥æŠŠ version æ‹·è´åˆ°æˆå‘˜
 //! @see DataIO_version_manager::get_version
 //!
 class DataIO_copy_version_proxy
@@ -66,21 +66,21 @@ public:
 		: m_version(version), m_loadedVersion(loadedVersion) {}
 
 	template<class Input> friend void
-		DataIO_loadObject(Input& input, DataIO_copy_version_proxy x)
+		DataIO_loadObject(Input&, DataIO_copy_version_proxy x)
 	{
 		x.m_version = x.m_loadedVersion;
 	}
 
 	template<class Output> friend void
-		DataIO_saveObject(Output& output, const DataIO_copy_version_proxy& x)
+		DataIO_saveObject(Output&, const DataIO_copy_version_proxy&)
 	{
 		// ignore
 	}
 };
 
-//! ¿ÉÒÔÔÚ DATA_IO_REG_LOAD_SAVE_V ºêÖĞÊ¹ÓÃ
+//! å¯ä»¥åœ¨ DATA_IO_REG_LOAD_SAVE_V å®ä¸­ä½¿ç”¨
 //!
-//! ÓÃÀ´ÔÚÅÉÉúÀàÖĞµ÷ÓÃ»ùÀàµÄ load(object, version)/save(object, version)
+//! ç”¨æ¥åœ¨æ´¾ç”Ÿç±»ä¸­è°ƒç”¨åŸºç±»çš„ load(object, version)/save(object, version)
 //!
 //! @see DataIO_version_manager::base
 template<class BaseClassPtr>
@@ -105,7 +105,7 @@ public:
 	}
 };
 
-//! °æ±¾¹ÜÀí
+//! ç‰ˆæœ¬ç®¡ç†
 //!
 //! @see DATA_IO_REG_VERSION_SERIALIZE/DATA_IO_REG_LOAD_SAVE_V
 //!
@@ -142,7 +142,7 @@ public:
 
 	//! version is const when save()
 	DataIO_copy_version_proxy
-	get_version(const uint32_t& version)
+	get_version(const uint32_t&/*version*/)
 	{
 		static uint32_t v2;
 		return DataIO_copy_version_proxy(v2, m_version);

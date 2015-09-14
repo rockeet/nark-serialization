@@ -41,7 +41,7 @@ public:
 	 */
 	virtual bool eof() const = 0;
 
-#ifdef _GNU_SOURCE
+#if defined(__GLIBC__) || defined(__CYGWIN__)
 	FILE* forInputFILE();
 #endif
 };
@@ -56,7 +56,7 @@ public:
 	virtual size_t write(const void* vbuf, size_t length) = 0;
 	virtual void flush() = 0;
 
-#ifdef _GNU_SOURCE
+#if defined(__GLIBC__) || defined(__CYGWIN__)
 	FILE* forOutputFILE();
 #endif
 };

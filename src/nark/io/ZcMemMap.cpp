@@ -326,7 +326,7 @@ void ZcMemMap::unmap(void* base, size_t size)
 void ZcMemMap::open(stream_position_t new_file_size, const std::string& fpath, int mode)
 {
     using namespace std;
-#ifndef __CYGWIN__
+#if defined(O_LARGEFILE)
 	mode |= O_LARGEFILE;
 #endif
 

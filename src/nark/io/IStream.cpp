@@ -84,7 +84,7 @@ size_t ISeekableStream::pwrite(stream_position_t pos, const void* vbuf, size_t l
 
 ///////////////////////////////////////////////////////
 //
-#ifdef _GNU_SOURCE
+#if defined(__GLIBC__) || defined(__CYGWIN__)
 
 ssize_t
 OutputStream_write(void *cookie, const char *buf, size_t size)

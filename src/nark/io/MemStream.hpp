@@ -79,7 +79,11 @@ public:
 	//! caller can use this function to determine an offset difference
 	ptrdiff_t diff(const void* start) const throw() { return m_pos - (byte*)start; }
 
-	void skip(ptrdiff_t diff) throw() {	m_pos += diff; }
+	byte* skip(ptrdiff_t diff) throw() {
+		byte* old = m_pos;
+		m_pos += diff;
+		return old;
+	}
 
 	byte uncheckedReadByte() { return *m_pos++; }
 	void uncheckedWriteByte(byte b) { *m_pos++ = b; }
@@ -156,15 +160,17 @@ public:
 	 @brief 向前跳过 @a diff 个字节
 	 @a 可以是负数，表示向后跳跃
 	 */
-	void skip(ptrdiff_t diff) {
+	byte* skip(ptrdiff_t diff) {
 		assert(m_pos + diff <= m_end);
+		byte* old = m_pos;
 		if (nark_likely(m_pos + diff <= m_end))
 			m_pos += diff;
 		else {
-			THROW_STD(invalid_argument
-				, "diff=%ld is too large, end-pos=%ld"
+			THROW_STD(out_of_range
+				, "diff=%ld, end-pos=%ld"
 				, long(diff), long(m_end-m_pos));
 		}
+		return old;
 	}
 	ptrdiff_t buf_remain_bytes() const { return m_end - m_pos; }
 
@@ -183,7 +189,9 @@ public:
 		m_pos += length;
 	}
 
+#if defined(__GLIBC__) || defined(__CYGWIN__)
 	FILE* forInputFILE();
+#endif
 
 	#include "var_int_declare_read.hpp"
 	#include "var_int_declare_write.hpp"
@@ -224,6 +232,20 @@ public:
 	size_t size() const throw() { return m_end-m_beg; }
 
 	size_t tell() const throw() { return m_pos-m_beg; }
+
+	byte* skip(ptrdiff_t diff) {
+		assert(m_pos + diff <= m_end);
+		assert(m_pos + diff >= m_beg);
+		byte* old = m_pos;
+		if (nark_likely(m_pos + diff <= m_end && m_pos + diff >= m_beg))
+			m_pos += diff;
+		else {
+			THROW_STD(out_of_range
+				, "diff=%ld, pos-beg=%ld, end-pos=%ld"
+				, long(diff), long(m_pos-m_beg), long(m_end-m_pos));
+		}
+		return old;
+	}
 
 	void rewind() throw() { m_pos = m_beg; }
 	void seek(ptrdiff_t newPos);
@@ -305,12 +327,15 @@ public:
 #endif
 	;
 
+#if defined(__GLIBC__) || defined(__CYGWIN__)
 	FILE* forFILE(const char* mode);
+#endif
 	void clone(const AutoGrownMemIO& src);
 
 	// rarely used methods....
 	//
 	void resize(size_t newsize);
+	void grow(size_t nGrow);
 	void init(size_t size);
 
 	template<class InputStream>
@@ -322,6 +347,27 @@ public:
 	}
 
 	void swap(AutoGrownMemIO& that) { SeekableMemIO::swap(that); }
+	void shrink_to_fit();
+
+	void risk_take_ownership(void* buf, size_t size) {
+		assert(NULL == m_beg); // must have no memory
+		m_beg = m_pos = (byte*)buf;
+		m_end = (byte*)buf + size;
+	}
+
+	void risk_release_ownership() {
+		this->m_beg = NULL;
+		this->m_end = NULL;
+		this->m_pos = NULL;
+	}
+
+	byte* release() {
+		byte* tmp = this->m_beg;
+		this->m_beg = NULL;
+		this->m_end = NULL;
+		this->m_pos = NULL;
+		return tmp;
+	}
 
 	template<class DataIO>
 	friend
@@ -343,7 +389,7 @@ public:
 
 private:
 	//@{
-	//! disable MemIO::set
+	//! disable super::set
 	//!
 	void set(void* buf, size_t size);
 	void set(void* beg, void* end);
@@ -391,7 +437,7 @@ private:
  */
 inline size_t MemIO::read(void* data, size_t length) throw()
 {
-	register ptrdiff_t n = m_end - m_pos;
+	ptrdiff_t n = m_end - m_pos;
 	if (nark_unlikely(n < ptrdiff_t(length))) {
 		memcpy(data, m_pos, n);
 	//	m_pos = m_end;
@@ -406,7 +452,7 @@ inline size_t MemIO::read(void* data, size_t length) throw()
 
 inline size_t MemIO::write(const void* data, size_t length) throw()
 {
-	register ptrdiff_t n = m_end - m_pos;
+	ptrdiff_t n = m_end - m_pos;
 	if (nark_unlikely(n < ptrdiff_t(length))) {
 		memcpy(m_pos, data, n);
 	//	m_pos = m_end;

@@ -9,7 +9,7 @@
 #include <limits>
 
 #include <boost/config.hpp>
-#include <boost/strong_typedef.hpp>
+#include <boost/serialization/strong_typedef.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/type_traits.hpp>
 

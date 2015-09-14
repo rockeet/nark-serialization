@@ -32,12 +32,12 @@
 		return *this;
 	}
 #else
-	template<class T> MyType& operator<<(T*& x)
+	template<class T> MyType& operator<<(T*&)
 	{
 		T::NotSupportSerializePointer();
 		return *this;
 	}
-	template<class T> MyType& operator<<(const T*& x)
+	template<class T> MyType& operator<<(const T*&)
 	{
 		T::NotSupportSerializePointer();
 		return *this;

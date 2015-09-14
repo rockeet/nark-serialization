@@ -64,7 +64,7 @@ template<class T> MyType& operator>>(T*& x)
 	return *this;
 }
 #else
-template<class T> MyType& operator>>(T*& x)
+template<class T> MyType& operator>>(T*&)
 {
 	T::NotSupportSerializePointer();
 	return *this;
@@ -167,3 +167,15 @@ MyType& operator>>(std::deque<ValueT, Alloc>& x)
 }
 //!@}
 
+template<class T>
+T load_as() {
+	T x;
+	*this >> x;
+	return x;
+}
+
+template<class T>
+void skip_obj() {
+	T x;
+	*this >> x;
+}
