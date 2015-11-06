@@ -80,7 +80,7 @@ struct SysData1 {
     unsigned b;
     string c;
 };
-DATA_IO_LOAD_SAVE_E(SysData2, &a &b &c)
+DATA_IO_LOAD_SAVE_E(SysData1, &a &b &c)
 
 struct SysData2 {
     int a;
