@@ -37,9 +37,13 @@ namespace nark {
 #ifdef BOOST_LITTLE_ENDIAN
 	#define DATA_IO_BSWAP_FOR_BIG(T)    typename DataIO_need_bswap<T>::type
 	#define DATA_IO_BSWAP_FOR_LITTLE(T) ByteSwap_false
+	#define BYTE_SWAP_IF_LITTLE_ENDIAN(x) x = nark::byte_swap(x)
+	#define BYTE_SWAP_IF_BIG_ENDIAN(x)
 #elif defined(BOOST_BIG_ENDIAN)
 	#define DATA_IO_BSWAP_FOR_BIG(T)    ByteSwap_false
 	#define DATA_IO_BSWAP_FOR_LITTLE(T) typename DataIO_need_bswap<T>::type
+	#define BYTE_SWAP_IF_LITTLE_ENDIAN(x)
+	#define BYTE_SWAP_IF_BIG_ENDIAN(x)  x = nark::byte_swap(x)
 #else
 	#error "must define BOOST_LITTLE_ENDIAN or BOOST_BIG_ENDIAN"
 #endif

@@ -21,6 +21,7 @@ endif
 
 FEBIRD_INC := -Isrc
 FEBIRD_INC += -I../nark-bone/src
+FEBIRD_INC += -I../nark-hashmap/src
 
 include ${BUILD_ROOT}/env.mk
 
@@ -43,7 +44,7 @@ override CXXFLAGS += ${FPIC}
 override LDFLAGS += ${FPIC}
 
 ifeq "$(shell expr substr ${COMPILER} 1 3)" "g++"
-  override LDFLAGS += -rdynamic
+#  override LDFLAGS += -rdynamic
   override CXXFLAGS += -time
   ifeq "$(shell echo ${COMPILER} | awk -F- '{if ($$2 >= 4.8) print 1;}')" "1"
     CXX_STD := -std=gnu++1y

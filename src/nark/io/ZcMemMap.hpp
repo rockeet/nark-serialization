@@ -89,7 +89,7 @@ public:
 // 	int errcode() const throw() { return m_errno; }
 // 	std::string errmsg() const throw();
 
-	int file_handle() const { return (int)m_hFile; }
+	int file_handle() const { return (int)(size_t)m_hFile; }
 
 	void align(stream_position_t* fpos, size_t* size)
 	{

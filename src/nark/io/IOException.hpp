@@ -12,6 +12,11 @@
 
 namespace nark {
 
+#if defined(_MSC_VER)
+// non dll-interface class 'std::exception' used as base for dll-interface
+#pragma warning(push)
+#pragma warning(disable:4275)
+#endif
 class FEBIRD_DLL_EXPORT IOException : public std::exception
 {
 protected:
@@ -29,6 +34,9 @@ public:
 	static int lastError();
 	static std::string errorText(int errCode);
 };
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 
 class FEBIRD_DLL_EXPORT OpenFileException : public IOException
 {

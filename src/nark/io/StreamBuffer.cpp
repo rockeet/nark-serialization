@@ -76,12 +76,6 @@ void IOBufferBase::set_bufsize(size_t size)
 	}
 }
 
-void IOBufferBase::skip(ptrdiff_t diff)
-{
-	assert(m_beg <= m_pos+diff && m_pos+diff <= m_end);
-	m_pos += diff;
-}
-
 void IOBufferBase::set_bufeof(size_t eofpos)
 {
 	assert(0 != m_beg);

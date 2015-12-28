@@ -46,9 +46,6 @@ class FEBIRD_DLL_EXPORT MemMapStream
 public:
 	typedef boost::mpl::true_ is_seekable;
 
-	static bool copyFile(const char* srcPath, const char* dstPath);
-	static void ThrowOpenFileException(const char* fpath, int mode);
-
 public:
 	MemMapStream(stream_position_t new_file_size, const std::string& fpath, int mode);
 	MemMapStream();
@@ -112,7 +109,7 @@ public:
 // 	int errcode() const throw() { return m_errno; }
 // 	std::string errmsg() const throw();
 
-	int file_handle() const { return (int)m_hFile; }
+	int file_handle() const { return (int)(size_t)m_hFile; }
 
 	void align(stream_position_t* fpos, size_t* size)
 	{

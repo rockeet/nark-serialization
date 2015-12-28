@@ -62,8 +62,8 @@ DataIO_IsDump_TypeTrue2(PortableNoVarInt, var_int64_t)
 //! can be used by code generator!!
 //
 #define DATA_IO_LOAD_SAVE(Class, Members)	\
-	template<class DataIO> void load(DataIO& aDataIO)	    { aDataIO Members; }\
-	template<class DataIO> void save(DataIO& aDataIO) const { aDataIO Members; }\
+	template<class DataIO> void dio_load(DataIO& aDataIO)	    { aDataIO Members; }\
+	template<class DataIO> void dio_save(DataIO& aDataIO) const { aDataIO Members; }\
 	DATA_IO_GEN_DUMP_TYPE_TRAITS(Class, Members) \
 	DATA_IO_OPTIMIZE_ELEMEN_LOAD(Class, Members) \
 	DATA_IO_OPTIMIZE_ELEMEN_SAVE(Class, Members) \
@@ -89,8 +89,8 @@ DataIO_IsDump_TypeTrue2(PortableNoVarInt, var_int64_t)
 #define DATA_IO_LOAD_SAVE_E(Class, Members)			\
   struct Class##_fdio : public Class				\
   {													\
-	template<class DataIO> void load(DataIO& aDataIO)	    { aDataIO Members; }\
-	template<class DataIO> void save(DataIO& aDataIO) const { aDataIO Members; }\
+	template<class DataIO> void dio_load(DataIO& aDataIO)	    { aDataIO Members; }\
+	template<class DataIO> void dio_save(DataIO& aDataIO) const { aDataIO Members; }\
 	DATA_IO_GEN_DUMP_TYPE_TRAITS(Class, Members) \
 	DATA_IO_OPTIMIZE_ELEMEN_LOAD(Class, Members) \
 	DATA_IO_OPTIMIZE_ELEMEN_SAVE(Class, Members) \
@@ -109,12 +109,12 @@ DataIO_IsDump_TypeTrue2(PortableNoVarInt, var_int64_t)
 	template<class DataIO>							\
 	void DataIO_loadObject(DataIO& dio, Class& x)	\
 	{												\
-		static_cast<Class##_fdio&>(x).load(dio);	\
+		static_cast<Class##_fdio&>(x).dio_load(dio);\
 	}												\
 	template<class DataIO>							\
 	void DataIO_saveObject(DataIO&dio,const Class&x)\
 	{												\
-		static_cast<const Class##_fdio&>(x).save(dio);\
+		static_cast<const Class##_fdio&>(x).dio_save(dio);\
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //@}
@@ -131,13 +131,13 @@ DataIO_IsDump_TypeTrue2(PortableNoVarInt, var_int64_t)
 
 #define DATA_IO_GEN_LOAD_SAVE_V(Class, Members)					\
 	template<class DataIO> void									\
-	load(DataIO& aDataIO, unsigned _U_version)					\
+	dio_load(DataIO& aDataIO, unsigned _U_version)				\
 	{															\
 		nark::DataIO_version_manager<Class> vmg(_U_version);	\
 		aDataIO Members;										\
 	}															\
 	template<class DataIO> void									\
-	save(DataIO& aDataIO, unsigned _U_version) const			\
+	dio_save(DataIO& aDataIO, unsigned _U_version) const		\
 	{															\
 		nark::DataIO_version_manager<Class> vmg(_U_version);	\
 		aDataIO Members;										\
@@ -160,7 +160,7 @@ DataIO_IsDump_TypeTrue2(PortableNoVarInt, var_int64_t)
 	template<class DataIO>									\
 	void DataIO_loadObject(DataIO& dio, Class& x)			\
 	{														\
-		static_cast<Class##_fdio&>(x).load(dio,				\
+		static_cast<Class##_fdio&>(x).dio_load(dio,			\
 		DataIO_load_check_version(							\
 			dio, CurrentVersion, BOOST_STRINGIZE(Class)));	\
 	}														\
@@ -169,7 +169,7 @@ DataIO_IsDump_TypeTrue2(PortableNoVarInt, var_int64_t)
 	{														\
 		dio << nark::serialize_version_t(CurrentVersion);	\
 		static_cast<const Class##_fdio&>(x)					\
-		.save(dio, CurrentVersion);							\
+		.dio_save(dio, CurrentVersion);						\
 	}														\
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //@}

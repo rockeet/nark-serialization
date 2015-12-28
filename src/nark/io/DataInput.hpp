@@ -369,7 +369,7 @@ typedef BigEndianNoVarIntInput MyType;
 
 //////////////////////////////////////////////////////////////////////////
 
-//! call Class::load(Input, version)
+//! call Class::dio_load(Input, version)
 template<class Input>
 unsigned int DataIO_load_check_version(Input& in, unsigned int curr_version, const char* className)
 {
@@ -385,14 +385,14 @@ unsigned int DataIO_load_check_version(Input& in, unsigned int curr_version, con
 }
 
 #define DATA_IO_REG_LOAD(Class) \
-  template<class Input> friend void DataIO_loadObject(Input& in, Class& x) { x.load(in); }
+  template<class Input> friend void DataIO_loadObject(Input& in, Class& x) { x.dio_load(in); }
 
 #define DATA_IO_REG_LOAD_V(Class, CurrentVersion)			\
 	template<class Input>									\
 	friend void DataIO_loadObject(Input& in, Class& x)		\
 	{														\
 		using namespace nark;								\
-		x.load(in, DataIO_load_check_version(				\
+		x.dio_load(in, DataIO_load_check_version(				\
 			in, CurrentVersion, BOOST_STRINGIZE(Class)));	\
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

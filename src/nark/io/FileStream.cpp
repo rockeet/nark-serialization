@@ -42,8 +42,9 @@ FileStream::~FileStream() {
 
 void FileStream::ThrowOpenFileException(const char* fpath, const char* mode)
 {
+	std::string errMsg = strerror(errno);
 	string_appender<> oss;
-	oss << "mode=" << mode;
+	oss << "mode=" << mode << ", errMsg: " << errMsg;
 	throw OpenFileException(fpath, oss.str().c_str());
 }
 

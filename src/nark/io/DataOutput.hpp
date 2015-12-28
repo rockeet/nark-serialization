@@ -352,14 +352,14 @@ void DataIO_saveObject(Output& output, const std::pair<FirstT, SecondT>& x)
 
 #define DATA_IO_REG_SAVE(Class) \
   template<class Output> friend \
-  void DataIO_saveObject(Output& output, const Class& x) { x.save(output); }
+  void DataIO_saveObject(Output& output, const Class& x) { x.dio_save(output); }
 
 #define DATA_IO_REG_SAVE_V(Class, CurrentVersion)	\
 	template<class Output>										\
 	friend void DataIO_saveObject(Output& out, const Class& x)	\
 	{															\
 		out << nark::serialize_version_t(CurrentVersion);		\
-		x.save(out, CurrentVersion);							\
+		x.dio_save(out, CurrentVersion);						\
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

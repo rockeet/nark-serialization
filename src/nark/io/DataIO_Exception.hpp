@@ -12,6 +12,11 @@
 
 namespace nark {
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+// non dll-interface class 'std::exception' used as base for dll-interface
+#pragma warning(push)
+#pragma warning(disable:4275)
+#endif
 class FEBIRD_DLL_EXPORT DataFormatException : public std::exception
 {
 protected:
@@ -23,6 +28,9 @@ public:
 
 	const char* what() const throw() { return m_message.c_str(); }
 };
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#pragma warning(pop)
+#endif
 
 class FEBIRD_DLL_EXPORT InvalidObjectException : public DataFormatException
 {

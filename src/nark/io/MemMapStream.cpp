@@ -32,7 +32,8 @@ static void write_error_msg(string_appender<>& oss)
 #else
 	char szbuf[256];
 	int  errCode = errno;
-	strerror_r(errCode, szbuf, 256);
+	if (strerror_r(errCode, szbuf, 256) != 0)
+		snprintf(szbuf, sizeof(szbuf), "strerror_r failed");
 	oss << "error[code=" << errCode << ", message=" << szbuf << "]";
 #endif
 }

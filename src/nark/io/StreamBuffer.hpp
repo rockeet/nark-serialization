@@ -86,11 +86,6 @@ public:
 	   	m_pos = m_beg + pos;
    	}
 
-	//! only seek in buffer
-	//!
-	//! when dest stream is null, can seek and used as a memstream
-	virtual void skip(ptrdiff_t diff);
-
 	//! set buffer eof
 	//!
 	//! most for m_is/m_os == 0
@@ -136,7 +131,7 @@ public:
 		m_is = stream;
 	}
 
-	IInputStream* get_stream() const { return m_is; }
+	IInputStream* getInputStream() const { return m_is; }
 
 	bool eof() { return m_pos == m_end && test_eof(); }
 
@@ -227,6 +222,8 @@ public:
 		BaseClass::attach(stream);
 		m_os = stream;
 	}
+	
+	IOutputStream* getOutputStream() const { return m_os; }
 
 	void flush();
 

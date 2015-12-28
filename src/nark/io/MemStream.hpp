@@ -145,6 +145,19 @@ public:
 	int  getByte() throw();
 	void writeByte(byte b) throw(OutOfSpaceException);
 
+	template<class ByteArray>
+	void readAll(ByteArray& ba) {
+		BOOST_STATIC_ASSERT(sizeof(ba[0]) == 1);
+		size_t len = m_end - m_pos;
+		ba.resize(len);
+		if (len) {
+			// must be a continuous memory block
+			assert(&*(ba.end()-1) - &*ba.begin() == len-1);
+			memcpy(&*ba.begin(), m_pos, len);
+			m_pos = m_end;
+		}
+	}
+
 	void ensureRead(void* data, size_t length) ;
 	void ensureWrite(const void* data, size_t length);
 
@@ -230,6 +243,12 @@ public:
 	byte*  begin()const throw() { return m_beg; }
 	byte*  buf()  const throw() { return m_beg; }
 	size_t size() const throw() { return m_end-m_beg; }
+
+	const char* c_str() const {
+		assert(m_pos < m_end);
+		assert('\0' == *m_pos);
+		return (const char*)m_beg;
+	}
 
 	size_t tell() const throw() { return m_pos-m_beg; }
 

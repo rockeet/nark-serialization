@@ -80,7 +80,7 @@ public:
 
 //! 可以在 DATA_IO_REG_LOAD_SAVE_V 宏中使用
 //!
-//! 用来在派生类中调用基类的 load(object, version)/save(object, version)
+//! 用来在派生类中调用基类的 dio_load(object, version)/dio_save(object, version)
 //!
 //! @see DataIO_version_manager::base
 template<class BaseClassPtr>
@@ -96,12 +96,12 @@ public:
 	template<class Input> friend void
 		DataIO_loadObject(Input& input, DataIO_base_class_version_load_save x)
 	{
-		x.m_base->load(input, x.m_version);
+		x.m_base->dio_load(input, x.m_version);
 	}
 	template<class Output> friend void
 		DataIO_saveObject(Output& output, const DataIO_base_class_version_load_save& x)
 	{
-		x.m_base->save(output, x.m_version);
+		x.m_base->dio_save(output, x.m_version);
 	}
 };
 
@@ -140,7 +140,7 @@ public:
 				(DataIO_copy_version_proxy(version, m_version));
 	}
 
-	//! version is const when save()
+	//! version is const when dio_save()
 	DataIO_copy_version_proxy
 	get_version(const uint32_t&/*version*/)
 	{
