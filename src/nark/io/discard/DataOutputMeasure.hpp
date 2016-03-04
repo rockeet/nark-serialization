@@ -178,48 +178,48 @@ public:
 
 	Final_Output& operator<<(serialize_version_t x) { return static_cast<Final_Output&>(*this) << var_uint32_t(x.t); }
 
-#define FEBIRD_GEN_MEASURE_SIZE(type, size) \
+#define NARK_GEN_MEASURE_SIZE(type, size) \
 	Final_Output& operator<<(type x) { this->m_size += size; return static_cast<Final_Output&>(*this); }
 
-#define FEBIRD_GEN_MEASURE_SIZE_FUN(type) \
+#define NARK_GEN_MEASURE_SIZE_FUN(type) \
 	Final_Output& operator<<(type x) { this->m_size += sizeof(type); return static_cast<Final_Output&>(*this); }
 
-#define FEBIRD_GEN_MEASURE_VAR_INT(type) \
+#define NARK_GEN_MEASURE_VAR_INT(type) \
 	Final_Output& operator<<(type x) { this->m_size += sizeof_int(x); return static_cast<Final_Output&>(*this); }
 
-	FEBIRD_GEN_MEASURE_VAR_INT(var_int16_t)
-	FEBIRD_GEN_MEASURE_VAR_INT(var_uint16_t)
-	FEBIRD_GEN_MEASURE_VAR_INT(var_int32_t)
-	FEBIRD_GEN_MEASURE_VAR_INT(var_uint32_t)
+	NARK_GEN_MEASURE_VAR_INT(var_int16_t)
+	NARK_GEN_MEASURE_VAR_INT(var_uint16_t)
+	NARK_GEN_MEASURE_VAR_INT(var_int32_t)
+	NARK_GEN_MEASURE_VAR_INT(var_uint32_t)
 
 #if !defined(BOOST_NO_INTRINSIC_INT64_T)
-	FEBIRD_GEN_MEASURE_VAR_INT(var_int64_t)
-	FEBIRD_GEN_MEASURE_VAR_INT(var_uint64_t)
+	NARK_GEN_MEASURE_VAR_INT(var_int64_t)
+	NARK_GEN_MEASURE_VAR_INT(var_uint64_t)
 #endif
 
-	FEBIRD_GEN_MEASURE_SIZE_FUN(char)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(unsigned char)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(signed char)
+	NARK_GEN_MEASURE_SIZE_FUN(char)
+	NARK_GEN_MEASURE_SIZE_FUN(unsigned char)
+	NARK_GEN_MEASURE_SIZE_FUN(signed char)
 
-	FEBIRD_GEN_MEASURE_SIZE_FUN(short)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(unsigned short)
+	NARK_GEN_MEASURE_SIZE_FUN(short)
+	NARK_GEN_MEASURE_SIZE_FUN(unsigned short)
 
-	FEBIRD_GEN_MEASURE_SIZE_FUN(int)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(unsigned int)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(long)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(unsigned long)
+	NARK_GEN_MEASURE_SIZE_FUN(int)
+	NARK_GEN_MEASURE_SIZE_FUN(unsigned int)
+	NARK_GEN_MEASURE_SIZE_FUN(long)
+	NARK_GEN_MEASURE_SIZE_FUN(unsigned long)
 
 #if defined(BOOST_HAS_LONG_LONG)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(long long)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(unsigned long long)
+	NARK_GEN_MEASURE_SIZE_FUN(long long)
+	NARK_GEN_MEASURE_SIZE_FUN(unsigned long long)
 #elif defined(BOOST_HAS_MS_INT64)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(__int64)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(unsigned __int64)
+	NARK_GEN_MEASURE_SIZE_FUN(__int64)
+	NARK_GEN_MEASURE_SIZE_FUN(unsigned __int64)
 #endif
 
-	FEBIRD_GEN_MEASURE_SIZE_FUN(float)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(double)
-	FEBIRD_GEN_MEASURE_SIZE_FUN(long double)
+	NARK_GEN_MEASURE_SIZE_FUN(float)
+	NARK_GEN_MEASURE_SIZE_FUN(double)
+	NARK_GEN_MEASURE_SIZE_FUN(long double)
 
 	Final_Output& operator<<(const char* s)
 	{

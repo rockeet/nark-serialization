@@ -1,4 +1,4 @@
-#ifdef FEBIRD_DATA_IO_SLOW_VAR_INT
+#ifdef NARK_DATA_IO_SLOW_VAR_INT
 protected:
 	template<class UInt>
 	UInt load_var_uint()
@@ -45,7 +45,7 @@ public:
 	   	return *this;
    	}
 
-#else // FEBIRD_DATA_IO_SLOW_VAR_INT
+#else // NARK_DATA_IO_SLOW_VAR_INT
 
 // fast var_*int*
 	MyType& operator>>(var_int32_t& x)
@@ -76,7 +76,7 @@ public:
 	   	x.t = this->getStream()->read_var_uint32();
 	   	return *this;
    	}
-#endif // FEBIRD_DATA_IO_SLOW_VAR_INT
+#endif // NARK_DATA_IO_SLOW_VAR_INT
 
 //-------------------------------------------------------------
 	MyType& operator>>(var_int30_t& x)

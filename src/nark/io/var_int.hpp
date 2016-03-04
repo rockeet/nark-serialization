@@ -34,7 +34,7 @@ template<class T> struct fixed_to_var;
 template<class VarIntT> struct var_int_org;
 template<class T> struct is_var_int : boost::mpl::false_ {};
 
-#define FEBIRD_DEFINE_VAR_INT_IMPL(IntT, VarIntT)\
+#define NARK_DEFINE_VAR_INT_IMPL(IntT, VarIntT)\
 	BOOST_STRONG_TYPEDEF(IntT, VarIntT)	\
 	template<> struct is_var_int<VarIntT> : boost::mpl::true_ {}; \
 	template<> struct is_primitive<VarIntT> : boost::mpl::true_ {}; \
@@ -43,27 +43,27 @@ template<class T> struct is_var_int : boost::mpl::false_ {};
 	template<> struct var_int_org<VarIntT> { typedef IntT type; };
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #else
-#define FEBIRD_DEFINE_VAR_INT_IMPL(IntT, VarIntT)\
+#define NARK_DEFINE_VAR_INT_IMPL(IntT, VarIntT)\
 	BOOST_STRONG_TYPEDEF(IntT, VarIntT)	\
 	template<> struct fixed_to_var<IntT> : VarIntT { typedef VarIntT type; }; \
 	template<> struct fixed_to_var<VarIntT> : VarIntT { typedef VarIntT type; };
 #endif
 
 #if defined(BOOST_HAS_LONG_LONG)
-	FEBIRD_DEFINE_VAR_INT_IMPL(         long long, var_int64_t)
-	FEBIRD_DEFINE_VAR_INT_IMPL(unsigned long long, var_uint64_t)
+	NARK_DEFINE_VAR_INT_IMPL(         long long, var_int64_t)
+	NARK_DEFINE_VAR_INT_IMPL(unsigned long long, var_uint64_t)
 	BOOST_STRONG_TYPEDEF(         long long, var_int61_t)
 	BOOST_STRONG_TYPEDEF(unsigned long long, var_uint61_t)
 #elif defined(BOOST_HAS_MS_INT64)
-	FEBIRD_DEFINE_VAR_INT_IMPL(         __int64, var_int64_t)
-	FEBIRD_DEFINE_VAR_INT_IMPL(unsigned __int64, var_uint64_t)
+	NARK_DEFINE_VAR_INT_IMPL(         __int64, var_int64_t)
+	NARK_DEFINE_VAR_INT_IMPL(unsigned __int64, var_uint64_t)
 	BOOST_STRONG_TYPEDEF(         __int64, var_int61_t)
 	BOOST_STRONG_TYPEDEF(unsigned __int64, var_uint61_t)
 #endif
 
 #if ULONG_MAX == 0xFFFFFFFF
-	FEBIRD_DEFINE_VAR_INT_IMPL(         long, var_int32_t)
-	FEBIRD_DEFINE_VAR_INT_IMPL(unsigned long, var_uint32_t)
+	NARK_DEFINE_VAR_INT_IMPL(         long, var_int32_t)
+	NARK_DEFINE_VAR_INT_IMPL(unsigned long, var_uint32_t)
 	BOOST_STRONG_TYPEDEF(		  long, var_int30_t)
 	BOOST_STRONG_TYPEDEF(unsigned long, var_uint30_t)
   #if UINT_MAX == 0xFFFFFFFF
@@ -73,8 +73,8 @@ template<class T> struct is_var_int : boost::mpl::false_ {};
     #error "don't support 16bit int"
   #endif
 #elif UINT_MAX == 0xFFFFFFFF
-	FEBIRD_DEFINE_VAR_INT_IMPL(         int, var_int32_t)
-	FEBIRD_DEFINE_VAR_INT_IMPL(unsigned int, var_uint32_t)
+	NARK_DEFINE_VAR_INT_IMPL(         int, var_int32_t)
+	NARK_DEFINE_VAR_INT_IMPL(unsigned int, var_uint32_t)
 	BOOST_STRONG_TYPEDEF(         int, var_int30_t)
 	BOOST_STRONG_TYPEDEF(unsigned int, var_uint30_t)
 	template<> struct fixed_to_var<         long> : var_int64_t  { typedef var_int64_t type; };
@@ -198,33 +198,33 @@ inline int64_t var_int61_u2s(uint64_t u) { return var_int_u2s<uint64_t, int64_t>
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////
-FEBIRD_DLL_EXPORT uint32_t load_var_uint32(const unsigned char* buf, const unsigned char** endp);
-FEBIRD_DLL_EXPORT uint32_t load_var_uint30(const unsigned char* buf, const unsigned char** endp);
-FEBIRD_DLL_EXPORT uint64_t load_var_uint64(const unsigned char* buf, const unsigned char** endp);
-FEBIRD_DLL_EXPORT uint64_t load_var_uint61(const unsigned char* buf, const unsigned char** endp);
-FEBIRD_DLL_EXPORT  int32_t load_var_int32(const unsigned char* buf, const unsigned char** endp);
-FEBIRD_DLL_EXPORT  int32_t load_var_int30(const unsigned char* buf, const unsigned char** endp);
-FEBIRD_DLL_EXPORT  int64_t load_var_int64(const unsigned char* buf, const unsigned char** endp);
-FEBIRD_DLL_EXPORT  int64_t load_var_int61(const unsigned char* buf, const unsigned char** endp);
+NARK_DLL_EXPORT uint32_t load_var_uint32(const unsigned char* buf, const unsigned char** endp);
+NARK_DLL_EXPORT uint32_t load_var_uint30(const unsigned char* buf, const unsigned char** endp);
+NARK_DLL_EXPORT uint64_t load_var_uint64(const unsigned char* buf, const unsigned char** endp);
+NARK_DLL_EXPORT uint64_t load_var_uint61(const unsigned char* buf, const unsigned char** endp);
+NARK_DLL_EXPORT  int32_t load_var_int32(const unsigned char* buf, const unsigned char** endp);
+NARK_DLL_EXPORT  int32_t load_var_int30(const unsigned char* buf, const unsigned char** endp);
+NARK_DLL_EXPORT  int64_t load_var_int64(const unsigned char* buf, const unsigned char** endp);
+NARK_DLL_EXPORT  int64_t load_var_int61(const unsigned char* buf, const unsigned char** endp);
 
 //--------------------------------------------------------------------------------------
-FEBIRD_DLL_EXPORT unsigned char* save_var_uint32(unsigned char* buf, uint32_t x);
-FEBIRD_DLL_EXPORT unsigned char* save_var_uint30(unsigned char* buf, uint32_t x);
-FEBIRD_DLL_EXPORT unsigned char* save_var_uint64(unsigned char* buf, uint64_t x);
-FEBIRD_DLL_EXPORT unsigned char* save_var_uint61(unsigned char* buf, uint64_t x);
-FEBIRD_DLL_EXPORT unsigned char* save_var_int32(unsigned char* buf, int32_t x);
-FEBIRD_DLL_EXPORT unsigned char* save_var_int30(unsigned char* buf, int32_t x);
-FEBIRD_DLL_EXPORT unsigned char* save_var_int64(unsigned char* buf, int64_t x);
-FEBIRD_DLL_EXPORT unsigned char* save_var_int61(unsigned char* buf, int64_t x);
+NARK_DLL_EXPORT unsigned char* save_var_uint32(unsigned char* buf, uint32_t x);
+NARK_DLL_EXPORT unsigned char* save_var_uint30(unsigned char* buf, uint32_t x);
+NARK_DLL_EXPORT unsigned char* save_var_uint64(unsigned char* buf, uint64_t x);
+NARK_DLL_EXPORT unsigned char* save_var_uint61(unsigned char* buf, uint64_t x);
+NARK_DLL_EXPORT unsigned char* save_var_int32(unsigned char* buf, int32_t x);
+NARK_DLL_EXPORT unsigned char* save_var_int30(unsigned char* buf, int32_t x);
+NARK_DLL_EXPORT unsigned char* save_var_int64(unsigned char* buf, int64_t x);
+NARK_DLL_EXPORT unsigned char* save_var_int61(unsigned char* buf, int64_t x);
 
 ////////////////////////////////////////////////////////////////////////////////////////
-FEBIRD_DLL_EXPORT uint32_t reverse_get_var_uint32(const unsigned char* buf, unsigned char const ** cur);
-FEBIRD_DLL_EXPORT int32_t reverse_get_var_int32(const unsigned char* buf, unsigned char const ** cur);
+NARK_DLL_EXPORT uint32_t reverse_get_var_uint32(const unsigned char* buf, unsigned char const ** cur);
+NARK_DLL_EXPORT int32_t reverse_get_var_int32(const unsigned char* buf, unsigned char const ** cur);
 
 
 #if !defined(BOOST_NO_INT64_T)
-FEBIRD_DLL_EXPORT uint64_t reverse_get_var_uint64(const unsigned char* buf, unsigned char const ** cur);
-FEBIRD_DLL_EXPORT int64_t reverse_get_var_int64(const unsigned char* buf, unsigned char const ** cur);
+NARK_DLL_EXPORT uint64_t reverse_get_var_uint64(const unsigned char* buf, unsigned char const ** cur);
+NARK_DLL_EXPORT int64_t reverse_get_var_int64(const unsigned char* buf, unsigned char const ** cur);
 #endif
 
 } // namespace nark

@@ -17,7 +17,7 @@ namespace nark {
 #pragma warning(push)
 #pragma warning(disable:4275)
 #endif
-class FEBIRD_DLL_EXPORT DataFormatException : public std::exception
+class NARK_DLL_EXPORT DataFormatException : public std::exception
 {
 protected:
 	std::string m_message;
@@ -32,7 +32,7 @@ public:
 #pragma warning(pop)
 #endif
 
-class FEBIRD_DLL_EXPORT InvalidObjectException : public DataFormatException
+class NARK_DLL_EXPORT InvalidObjectException : public DataFormatException
 {
 public:
 	explicit InvalidObjectException(const char* szMsg = "nark::InvalidObjectException");
@@ -41,7 +41,7 @@ public:
 
 // a size value is too large, such as container's size
 //
-class FEBIRD_DLL_EXPORT SizeValueTooLargeException : public DataFormatException
+class NARK_DLL_EXPORT SizeValueTooLargeException : public DataFormatException
 {
 public:
 	static void checkSizeValue(size_t value, size_t maxValue);
@@ -49,13 +49,13 @@ public:
 	explicit SizeValueTooLargeException(const std::string& strMsg);
 };
 
-class FEBIRD_DLL_EXPORT BadVersionException : public DataFormatException
+class NARK_DLL_EXPORT BadVersionException : public DataFormatException
 {
 public:
 	explicit BadVersionException(unsigned loaded_version, unsigned curr_version, const char* className);
 };
 
-class FEBIRD_DLL_EXPORT NotFoundFactoryException : public DataFormatException
+class NARK_DLL_EXPORT NotFoundFactoryException : public DataFormatException
 {
 public:
 	explicit NotFoundFactoryException(const char* szMsg = "nark::NotFoundFactoryException");

@@ -1,4 +1,4 @@
-#define FEBIRD_DATA_IO_SLOW_VAR_INT
+#define NARK_DATA_IO_SLOW_VAR_INT
 
 #include <stdio.h>
 #include <stdlib.h>

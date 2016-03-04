@@ -22,8 +22,8 @@
 
 namespace nark {
 
-FEBIRD_DLL_EXPORT nark_no_return void throw_EndOfFile (const char* func, size_t want, size_t available);
-FEBIRD_DLL_EXPORT nark_no_return void throw_OutOfSpace(const char* func, size_t want, size_t available);
+NARK_DLL_EXPORT nark_no_return void throw_EndOfFile (const char* func, size_t want, size_t available);
+NARK_DLL_EXPORT nark_no_return void throw_OutOfSpace(const char* func, size_t want, size_t available);
 
 //! MinMemIO
 //! +--MemIO
@@ -38,7 +38,7 @@ FEBIRD_DLL_EXPORT nark_no_return void throw_OutOfSpace(const char* func, size_t 
  @note
   -# 如果无法预测是否会越界，禁止使用该类
  */
-class FEBIRD_DLL_EXPORT MinMemIO
+class NARK_DLL_EXPORT MinMemIO
 {
 public:
 	typedef boost::mpl::false_ is_seekable; //!< 不能 seek
@@ -114,7 +114,7 @@ protected:
   这个类的尺寸非常小，在极端情况下效率非常高，在使用外部提供的缓冲时，这个类是最佳的选择
   这个类可以安全地浅拷贝
  */
-class FEBIRD_DLL_EXPORT MemIO : protected MinMemIO
+class NARK_DLL_EXPORT MemIO : protected MinMemIO
 {
 public:
 	using MinMemIO::current;
@@ -217,9 +217,9 @@ protected:
 	byte* m_end; // only used by set/eof
 };
 
-class FEBIRD_DLL_EXPORT AutoGrownMemIO;
+class NARK_DLL_EXPORT AutoGrownMemIO;
 
-class FEBIRD_DLL_EXPORT SeekableMemIO : public MemIO
+class NARK_DLL_EXPORT SeekableMemIO : public MemIO
 {
 public:
 	typedef boost::mpl::true_ is_seekable; //!< 可以 seek
@@ -300,7 +300,7 @@ private:
   - 如果还需要 seekable, 使用 SeekableMemIO
  */
 //template<bool Use_c_malloc>
-class FEBIRD_DLL_EXPORT AutoGrownMemIO : public SeekableMemIO
+class NARK_DLL_EXPORT AutoGrownMemIO : public SeekableMemIO
 {
 	DECLARE_NONE_COPYABLE_CLASS(AutoGrownMemIO);
 

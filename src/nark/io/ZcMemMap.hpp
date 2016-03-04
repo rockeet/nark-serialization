@@ -36,7 +36,7 @@
 
 namespace nark {
 
-class FEBIRD_DLL_EXPORT ZcMemMap
+class NARK_DLL_EXPORT ZcMemMap
    	: public IZeroCopyInputStream
 	, public IZeroCopyOutputStream
 	, public ISeekable

@@ -217,8 +217,8 @@ void FileStream::ensureWrite_slow(const void* vbuf, size_t length) {
 
 #else
 
-FEBIRD_GEN_ensureRead (FileStream::)
-FEBIRD_GEN_ensureWrite(FileStream::)
+NARK_GEN_ensureRead (FileStream::)
+NARK_GEN_ensureWrite(FileStream::)
 
 #endif
 

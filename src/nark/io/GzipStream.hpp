@@ -13,7 +13,7 @@
 
 namespace nark {
 
-class FEBIRD_DLL_EXPORT GzipStreamBase : public RefCounter
+class NARK_DLL_EXPORT GzipStreamBase : public RefCounter
 {
 protected:
 	void* m_fp;
@@ -31,7 +31,7 @@ public:
 	void close();
 };
 
-class FEBIRD_DLL_EXPORT GzipInputStream	: public IInputStream, public GzipStreamBase
+class NARK_DLL_EXPORT GzipInputStream	: public IInputStream, public GzipStreamBase
 {
 	DECLARE_NONE_COPYABLE_CLASS(GzipInputStream)
 
@@ -46,7 +46,7 @@ public:
 	size_t read(void* buf, size_t size) throw();
 };
 
-class FEBIRD_DLL_EXPORT GzipOutputStream : public IOutputStream, public GzipStreamBase
+class NARK_DLL_EXPORT GzipOutputStream : public IOutputStream, public GzipStreamBase
 {
 	DECLARE_NONE_COPYABLE_CLASS(GzipOutputStream)
 

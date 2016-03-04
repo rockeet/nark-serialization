@@ -173,7 +173,7 @@ size_t BzipInputStream::read(void* buf, size_t size)
 	return (size_t)nRead;
 }
 
-FEBIRD_GEN_ensureRead (BzipInputStream::)
+NARK_GEN_ensureRead (BzipInputStream::)
 
 ///////////////////////////////////////////////////////
 
@@ -295,7 +295,7 @@ size_t BzipOutputStream::write(const void* buf, size_t size)
 	}
 	return size;
 }
-FEBIRD_GEN_ensureWrite(BzipOutputStream::)
+NARK_GEN_ensureWrite(BzipOutputStream::)
 
 } // namespace nark
 

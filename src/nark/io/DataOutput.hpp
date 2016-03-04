@@ -237,7 +237,7 @@ void DataIO_save_elem(DataIO& dio, const T& x, Bswap)
 #endif
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#define FEBIRD_DataOutput_NestStreamPtr(DataOutput) \
+#define NARK_DataOutput_NestStreamPtr(DataOutput) \
 private: \
   StreamT* m_stream; \
 public: \
@@ -264,7 +264,7 @@ typedef LittleEndianDataOutput MyType;
 
 template<class StreamT>
 class LittleEndianDataOutput<StreamT*> {
-	FEBIRD_DataOutput_NestStreamPtr(LittleEndianDataOutput)
+	NARK_DataOutput_NestStreamPtr(LittleEndianDataOutput)
 typedef LittleEndianDataOutput MyType;
 #include "DataOutput_Basic.hpp"
 #include "DataOutput_String.hpp"
@@ -286,7 +286,7 @@ typedef BigEndianDataOutput MyType;
 
 template<class StreamT>
 class BigEndianDataOutput<StreamT*> {
-	FEBIRD_DataOutput_NestStreamPtr(BigEndianDataOutput)
+	NARK_DataOutput_NestStreamPtr(BigEndianDataOutput)
 typedef BigEndianDataOutput MyType;
 #include "DataOutput_Basic.hpp"
 #include "DataOutput_String.hpp"
@@ -309,7 +309,7 @@ typedef LittleEndianNoVarIntOutput MyType;
 
 template<class StreamT>
 class LittleEndianNoVarIntOutput<StreamT*> {
-	FEBIRD_DataOutput_NestStreamPtr(LittleEndianNoVarIntOutput)
+	NARK_DataOutput_NestStreamPtr(LittleEndianNoVarIntOutput)
 typedef LittleEndianNoVarIntOutput MyType;
 #include "DataOutput_Basic.hpp"
 #include "DataOutput_String.hpp"
@@ -331,7 +331,7 @@ typedef BigEndianNoVarIntOutput MyType;
 
 template<class StreamT>
 class BigEndianNoVarIntOutput<StreamT*> {
-	FEBIRD_DataOutput_NestStreamPtr(BigEndianNoVarIntOutput)
+	NARK_DataOutput_NestStreamPtr(BigEndianNoVarIntOutput)
 typedef BigEndianNoVarIntOutput MyType;
 #include "DataOutput_Basic.hpp"
 #include "DataOutput_String.hpp"
@@ -370,7 +370,7 @@ void DataIO_saveObject(Output& output, const std::pair<FirstT, SecondT>& x)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#ifdef FEBIRD_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE
+#ifdef NARK_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE
 
 #define DATA_IO_OPTIMIZE_VECTOR_SAVE(Class, Members)
 #define DATA_IO_OPTIMIZE_ELEMEN_SAVE(Class, Members)
@@ -442,7 +442,7 @@ void DataIO_saveObject(Output& output, const std::pair<FirstT, SecondT>& x)
 		Self(x).opt_save(dio, Bswap());	 \
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#endif // FEBIRD_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE
+#endif // NARK_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE
 
 #ifdef BOOST_LITTLE_ENDIAN
 	#define NativeDataOutput LittleEndianDataOutput

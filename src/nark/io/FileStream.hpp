@@ -28,7 +28,7 @@ namespace nark {
   -# FileStream::readByte maybe not thread-safe
   -# FileStream::writeByte maybe not thread-safe
  */
-class FEBIRD_DLL_EXPORT FileStream
+class NARK_DLL_EXPORT FileStream
 	: public RefCounter
 	, public IInputStream
 	, public IOutputStream
@@ -111,7 +111,7 @@ private:
 #endif
 };
 
-class FEBIRD_DLL_EXPORT NonOwnerFileStream : public FileStream {
+class NARK_DLL_EXPORT NonOwnerFileStream : public FileStream {
 public:
 	explicit NonOwnerFileStream(FILE* fp) throw() { m_fp = fp; }
 	NonOwnerFileStream(const char* fpath, const char* mode) : FileStream(fpath, mode) {}

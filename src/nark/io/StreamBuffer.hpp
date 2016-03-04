@@ -50,7 +50,7 @@ class IInputStream;
 class IOutputStream;
 class ISeekable;
 
-class FEBIRD_DLL_EXPORT IOBufferBase : public RefCounter
+class NARK_DLL_EXPORT IOBufferBase : public RefCounter
 {
 private:
 	// can not copy
@@ -116,7 +116,7 @@ protected:
 	size_t m_capacity; // buffer capacity
 };
 
-class FEBIRD_DLL_EXPORT InputBuffer : public IOBufferBase
+class NARK_DLL_EXPORT InputBuffer : public IOBufferBase
 {
 public:
 	typedef boost::mpl::false_ is_seekable;
@@ -206,7 +206,7 @@ protected:
 };
 
 template<class BaseClass>
-class FEBIRD_DLL_EXPORT OutputBufferBase : public BaseClass
+class NARK_DLL_EXPORT OutputBufferBase : public BaseClass
 {
 public:
 	typedef boost::mpl::false_ is_seekable;
@@ -302,7 +302,7 @@ protected:
 	using BaseClass::m_capacity;
 };
 
-class FEBIRD_DLL_EXPORT OutputBuffer : public OutputBufferBase<IOBufferBase>
+class NARK_DLL_EXPORT OutputBuffer : public OutputBufferBase<IOBufferBase>
 {
 public:
 	explicit OutputBuffer(IOutputStream* os = NULL)
@@ -313,7 +313,7 @@ public:
 };
 
 template<class BaseClass>
-class FEBIRD_DLL_EXPORT SeekableBufferBase : public BaseClass
+class NARK_DLL_EXPORT SeekableBufferBase : public BaseClass
 {
 protected:
 	using BaseClass::m_beg;
@@ -367,7 +367,7 @@ protected:
 	stream_position_t m_stream_pos;
 };
 
-class FEBIRD_DLL_EXPORT SeekableInputBuffer : public SeekableBufferBase<InputBuffer>
+class NARK_DLL_EXPORT SeekableInputBuffer : public SeekableBufferBase<InputBuffer>
 {
 	typedef SeekableBufferBase<InputBuffer> super;
 public:
@@ -377,7 +377,7 @@ protected:
 	virtual int is_prefetched() const;
 };
 
-class FEBIRD_DLL_EXPORT SeekableOutputBuffer : public SeekableBufferBase<OutputBuffer>
+class NARK_DLL_EXPORT SeekableOutputBuffer : public SeekableBufferBase<OutputBuffer>
 {
 	typedef SeekableBufferBase<OutputBuffer> super;
 
@@ -397,7 +397,7 @@ protected:
 	virtual int is_prefetched() const;
 };
 
-class FEBIRD_DLL_EXPORT SeekableBuffer :
+class NARK_DLL_EXPORT SeekableBuffer :
 	public SeekableBufferBase<OutputBufferBase<InputBuffer> >
 {
 	typedef SeekableBufferBase<OutputBufferBase<InputBuffer> > super;
@@ -475,7 +475,7 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-class FEBIRD_DLL_EXPORT FileStreamBuffer : public SeekableBuffer
+class NARK_DLL_EXPORT FileStreamBuffer : public SeekableBuffer
 {
 public:
 	explicit FileStreamBuffer(const char* fname, const char* mode, size_t capacity = 8*1024);

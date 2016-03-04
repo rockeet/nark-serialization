@@ -10,7 +10,7 @@
 
 #define BYTE_IO_EMPTY
 
-#define FEBIRD_GEN_ensureRead(prefix)  \
+#define NARK_GEN_ensureRead(prefix)  \
 	void prefix ensureRead(void* vbuf, size_t length) \
 	{ \
 		size_t n = this->read(vbuf, length); \
@@ -24,7 +24,7 @@
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#define FEBIRD_GEN_ensureWrite(prefix)  \
+#define NARK_GEN_ensureWrite(prefix)  \
 	void prefix ensureWrite(const void* vbuf, size_t length) \
 	{ \
 		size_t n = this->write(vbuf, length); \
@@ -38,7 +38,7 @@
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#define FEBIRD_GEN_getByte(prefix) \
+#define NARK_GEN_getByte(prefix) \
 	int prefix getByte() \
 	{ \
 		unsigned char b; \
@@ -48,7 +48,7 @@
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#define FEBIRD_GEN_readByte(prefix) \
+#define NARK_GEN_readByte(prefix) \
 	unsigned char prefix readByte() \
 	{ \
 		unsigned char b; \
@@ -58,7 +58,7 @@
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#define FEBIRD_GEN_writeByte(prefix) \
+#define NARK_GEN_writeByte(prefix) \
 	void prefix writeByte(unsigned char b) \
 	{ \
 		if (this->write(&b, 1) == 0) \

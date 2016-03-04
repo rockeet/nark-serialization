@@ -16,7 +16,7 @@
 
 namespace nark {
 
-class FEBIRD_DLL_EXPORT IZeroCopyInputStream
+class NARK_DLL_EXPORT IZeroCopyInputStream
 {
 public:
 	typedef boost::mpl::false_ is_seekable;
@@ -36,7 +36,7 @@ public:
 	virtual bool eof() const = 0;
 };
 
-class FEBIRD_DLL_EXPORT IZeroCopyOutputStream
+class NARK_DLL_EXPORT IZeroCopyOutputStream
 {
 public:
 	typedef boost::mpl::false_ is_seekable;
@@ -56,7 +56,7 @@ public:
 	virtual void zcFlush(size_t nWritten) = 0;
 };
 
-class FEBIRD_DLL_EXPORT ZeroCopyBase
+class NARK_DLL_EXPORT ZeroCopyBase
 {
 protected:
 	unsigned char* m_beg;
@@ -78,7 +78,7 @@ public:
 	ptrdiff_t buf_remain_bytes() const { return m_end - m_pos; }
 };
 
-class FEBIRD_DLL_EXPORT ZcReader : public ZeroCopyBase
+class NARK_DLL_EXPORT ZcReader : public ZeroCopyBase
 {
 	IZeroCopyInputStream* m_is;
 
@@ -145,7 +145,7 @@ protected:
 	size_t do_fill_and_read(void* vbuf, size_t length);
 };
 
-class FEBIRD_DLL_EXPORT ZcWriter : public ZeroCopyBase
+class NARK_DLL_EXPORT ZcWriter : public ZeroCopyBase
 {
 	IZeroCopyOutputStream* m_os;
 

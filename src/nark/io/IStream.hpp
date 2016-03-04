@@ -12,7 +12,7 @@
 
 namespace nark {
 
-class FEBIRD_DLL_EXPORT ISeekable
+class NARK_DLL_EXPORT ISeekable
 {
 public:
 	typedef boost::mpl::true_ is_seekable;
@@ -25,7 +25,7 @@ public:
 	virtual stream_position_t size() const = 0;
 };
 
-class FEBIRD_DLL_EXPORT IInputStream
+class NARK_DLL_EXPORT IInputStream
 {
 public:
 	typedef boost::mpl::false_ is_seekable;
@@ -46,7 +46,7 @@ public:
 #endif
 };
 
-class FEBIRD_DLL_EXPORT IOutputStream
+class NARK_DLL_EXPORT IOutputStream
 {
 public:
 	typedef boost::mpl::false_ is_seekable;
@@ -61,32 +61,32 @@ public:
 #endif
 };
 
-class FEBIRD_DLL_EXPORT IDuplexStream : public IInputStream, public IOutputStream
+class NARK_DLL_EXPORT IDuplexStream : public IInputStream, public IOutputStream
 {
 public:
 	typedef boost::mpl::false_ is_seekable;
 };
 
-class FEBIRD_DLL_EXPORT ISeekableInputStream : public ISeekable, public IInputStream
+class NARK_DLL_EXPORT ISeekableInputStream : public ISeekable, public IInputStream
 {
 public:
    	typedef boost::mpl::true_ is_seekable;
 	virtual size_t pread(stream_position_t pos, void* vbuf, size_t length);
 };
-class FEBIRD_DLL_EXPORT ISeekableOutputStream : public ISeekable, public IOutputStream
+class NARK_DLL_EXPORT ISeekableOutputStream : public ISeekable, public IOutputStream
 {
 public:
    	typedef boost::mpl::true_ is_seekable;
 	virtual size_t pwrite(stream_position_t pos, const void* vbuf, size_t length);
 };
-class FEBIRD_DLL_EXPORT ISeekableStream : public ISeekable, public IInputStream, public IOutputStream
+class NARK_DLL_EXPORT ISeekableStream : public ISeekable, public IInputStream, public IOutputStream
 {
 public:	typedef boost::mpl::true_ is_seekable;
 	virtual size_t pread(stream_position_t pos, void* vbuf, size_t length);
 	virtual size_t pwrite(stream_position_t pos, const void* vbuf, size_t length);
 };
 
-class FEBIRD_DLL_EXPORT IAcceptor
+class NARK_DLL_EXPORT IAcceptor
 {
 public:
 	virtual ~IAcceptor();

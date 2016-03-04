@@ -38,11 +38,11 @@ namespace nark {
 			m_fp->Flush();
 		}
 
-		FEBIRD_GEN_ensureRead (MfcFileStream::)
-		FEBIRD_GEN_ensureWrite(MfcFileStream::)
-		FEBIRD_GEN_getByte(MfcFileStream::)
-		FEBIRD_GEN_readByte(MfcFileStream::)
-		FEBIRD_GEN_writeByte(MfcFileStream::)
+		NARK_GEN_ensureRead (MfcFileStream::)
+		NARK_GEN_ensureWrite(MfcFileStream::)
+		NARK_GEN_getByte(MfcFileStream::)
+		NARK_GEN_readByte(MfcFileStream::)
+		NARK_GEN_writeByte(MfcFileStream::)
 
 		size_t MfcArchiveStream::read(void* vbuf, size_t length)
 		{
@@ -59,11 +59,11 @@ namespace nark {
 		}
 		void MfcArchiveStream::flush() { m_fp->Flush(); }
 
-		FEBIRD_GEN_ensureRead (MfcArchiveStream::)
-		FEBIRD_GEN_ensureWrite(MfcArchiveStream::)
-		FEBIRD_GEN_getByte(MfcArchiveStream::)
-		FEBIRD_GEN_readByte(MfcArchiveStream::)
-		FEBIRD_GEN_writeByte(MfcArchiveStream::)
+		NARK_GEN_ensureRead (MfcArchiveStream::)
+		NARK_GEN_ensureWrite(MfcArchiveStream::)
+		NARK_GEN_getByte(MfcArchiveStream::)
+		NARK_GEN_readByte(MfcArchiveStream::)
+		NARK_GEN_writeByte(MfcArchiveStream::)
 }
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)

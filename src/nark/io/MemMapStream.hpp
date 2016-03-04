@@ -39,7 +39,7 @@ namespace nark {
  * MemMapStream may be slower than buffered read/write ReadFile/WriteFile
  *    because MemMapStream may cause OS to close prefetch
  */
-class FEBIRD_DLL_EXPORT MemMapStream
+class NARK_DLL_EXPORT MemMapStream
 {
 	DECLARE_NONE_COPYABLE_CLASS(MemMapStream)
 
@@ -346,7 +346,7 @@ public:
 };
 
 //! 可以映射不对齐的内存数据
-class FEBIRD_DLL_EXPORT MMS_MapData
+class NARK_DLL_EXPORT MMS_MapData
 {
 	DECLARE_NONE_COPYABLE_CLASS(MMS_MapData)
 

@@ -32,21 +32,21 @@ public:
 	BaseInt& value() { return m_val; }
 	BaseInt  value() const { return m_val; }
 
-#define FEBIRD_custom_int_gen_operator(op) \
+#define NARK_custom_int_gen_operator(op) \
 	BaseInt operator op(custom_int y) const { return m_val op y.m_val; }
 
-	FEBIRD_custom_int_gen_operator(+)
-	FEBIRD_custom_int_gen_operator(-)
-	FEBIRD_custom_int_gen_operator(*)
-	FEBIRD_custom_int_gen_operator(/)
-	FEBIRD_custom_int_gen_operator(%)
-	FEBIRD_custom_int_gen_operator(^)
-	FEBIRD_custom_int_gen_operator(&)
-	FEBIRD_custom_int_gen_operator(|)
-	FEBIRD_custom_int_gen_operator(<<)
-	FEBIRD_custom_int_gen_operator(>>)
+	NARK_custom_int_gen_operator(+)
+	NARK_custom_int_gen_operator(-)
+	NARK_custom_int_gen_operator(*)
+	NARK_custom_int_gen_operator(/)
+	NARK_custom_int_gen_operator(%)
+	NARK_custom_int_gen_operator(^)
+	NARK_custom_int_gen_operator(&)
+	NARK_custom_int_gen_operator(|)
+	NARK_custom_int_gen_operator(<<)
+	NARK_custom_int_gen_operator(>>)
 
-#undef FEBIRD_custom_int_gen_operator
+#undef NARK_custom_int_gen_operator
 
 	bool operator&&(custom_int y) const { return m_val && y.m_val; }
 	bool operator||(custom_int y) const { return m_val || y.m_val; }
@@ -73,33 +73,33 @@ public:
 		return t;
 	}
 
-#define FEBIRD_custom_int_gen_assign_op(op)\
+#define NARK_custom_int_gen_assign_op(op)\
 	custom_int& operator op(custom_int y)	\
 	{	m_val op y;						\
 		m_val %= (BaseInt(1) << Bits);	\
 		return *this;					\
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	FEBIRD_custom_int_gen_assign_op(+=)
-	FEBIRD_custom_int_gen_assign_op(-=)
-	FEBIRD_custom_int_gen_assign_op(*=)
-#undef FEBIRD_custom_int_gen_assign_op
+	NARK_custom_int_gen_assign_op(+=)
+	NARK_custom_int_gen_assign_op(-=)
+	NARK_custom_int_gen_assign_op(*=)
+#undef NARK_custom_int_gen_assign_op
 
 // not need: "m_val %= (BaseInt(1) << Bits);"
-#define FEBIRD_custom_int_gen_assign_op(op)\
+#define NARK_custom_int_gen_assign_op(op)\
 	custom_int& operator op(custom_int y)	\
 	{	m_val op y;						\
 		return *this;					\
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	FEBIRD_custom_int_gen_assign_op(/=)
-	FEBIRD_custom_int_gen_assign_op(%=)
-	FEBIRD_custom_int_gen_assign_op(&=)
-	FEBIRD_custom_int_gen_assign_op(|=)
-	FEBIRD_custom_int_gen_assign_op(^=)
-	FEBIRD_custom_int_gen_assign_op(<<=)
-	FEBIRD_custom_int_gen_assign_op(>>=)
-#undef FEBIRD_custom_int_gen_assign_op
+	NARK_custom_int_gen_assign_op(/=)
+	NARK_custom_int_gen_assign_op(%=)
+	NARK_custom_int_gen_assign_op(&=)
+	NARK_custom_int_gen_assign_op(|=)
+	NARK_custom_int_gen_assign_op(^=)
+	NARK_custom_int_gen_assign_op(<<=)
+	NARK_custom_int_gen_assign_op(>>=)
+#undef NARK_custom_int_gen_assign_op
 
 	template<class Input> friend void DataIO_loadObject(Input& input, custom_int& x)
 	{

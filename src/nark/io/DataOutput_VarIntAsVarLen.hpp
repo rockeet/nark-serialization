@@ -1,5 +1,5 @@
 public:
-#ifdef FEBIRD_DATA_IO_SLOW_VAR_INT
+#ifdef NARK_DATA_IO_SLOW_VAR_INT
 
 	MyType& operator<<(var_int32_t x)
 	{
@@ -35,7 +35,7 @@ public:
 		this->ensureWrite(buf, save_var_uint32(buf, x.t) - buf);
 		return *this;
 	}
-#else // FEBIRD_DATA_IO_SLOW_VAR_INT
+#else // NARK_DATA_IO_SLOW_VAR_INT
 // fast var_*int*
 	MyType& operator<<(var_int32_t x)
 	{
@@ -66,7 +66,7 @@ public:
 		this->getStream()->write_var_uint32(x.t);
 		return *this;
 	}
-#endif // FEBIRD_DATA_IO_SLOW_VAR_INT
+#endif // NARK_DATA_IO_SLOW_VAR_INT
 
 //--------------------------------------------------------
 	MyType& operator<<(var_int30_t x)

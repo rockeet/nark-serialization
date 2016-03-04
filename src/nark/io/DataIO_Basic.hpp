@@ -70,7 +70,7 @@ typedef boost::mpl::false_ IsDump_false;
   struct DataIO_is_dump : public IsDump_false {};
 #endif
 
-#if defined(FEBIRD_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE)
+#if defined(NARK_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE)
 
 	#define DataIO_IsDump_TypeTrue1(T)
 	#define DataIO_IsDump_TypeTrue2(ByteOrder, T)
@@ -89,10 +89,10 @@ typedef boost::mpl::false_ IsDump_false;
 		: public IsDump_true {};				\
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#endif // FEBIRD_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE
+#endif // NARK_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE
 
 
-#if !defined(FEBIRD_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE) && \
+#if !defined(NARK_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE) && \
   defined(CXX_RETURN_TYPE_DEDUCTION) && CXX_RETURN_TYPE_DEDUCTION >= 201304
 
   // [dio Members] must be inside a member function of [Class],

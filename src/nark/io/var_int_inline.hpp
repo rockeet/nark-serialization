@@ -2,12 +2,12 @@
 #define __nark_io_var_int_inline_h__
 
 #ifdef _MSC_VER
-#  define FEBIRD_FORCE_INLINE __forceinline
+#  define NARK_FORCE_INLINE __forceinline
 #elif defined(__GNUC__) || defined(__INTEL_COMPILER)
-//#  define FEBIRD_FORCE_INLINE __attribute__((always_inline))
-#  define FEBIRD_FORCE_INLINE inline
+//#  define NARK_FORCE_INLINE __attribute__((always_inline))
+#  define NARK_FORCE_INLINE inline
 #else
-#  define FEBIRD_FORCE_INLINE inline
+#  define NARK_FORCE_INLINE inline
 #endif
 
 #if !defined(BOOST_BIG_ENDIAN) && !defined(BOOST_LITTLE_ENDIAN)
@@ -22,7 +22,7 @@ namespace nark {
 */
 
 template<class T_uint>
-FEBIRD_FORCE_INLINE
+NARK_FORCE_INLINE
 T_uint gg_load_var_uint(const unsigned char* buf, const unsigned char** endp, const char* func)
 {
 	const int maxshift = sizeof(T_uint) == 4 ? 28 : 63;
@@ -74,7 +74,7 @@ T_uint gg_load_var_uint(const unsigned char* buf, const unsigned char** endp, co
 }
 
 template<class Stream, class T_uint>
-FEBIRD_FORCE_INLINE
+NARK_FORCE_INLINE
 T_uint gg_load_var_uint_slow(Stream& s, const char* func)
 {
 	const int maxshift = sizeof(T_uint) == 4 ? 28 : 63;
@@ -91,7 +91,7 @@ T_uint gg_load_var_uint_slow(Stream& s, const char* func)
 }
 
 template<class T_uint>
-FEBIRD_FORCE_INLINE
+NARK_FORCE_INLINE
 unsigned char* gg_save_var_uint(unsigned char* p, T_uint x)
 {
 #if 0
@@ -120,7 +120,7 @@ unsigned char* gg_save_var_uint(unsigned char* p, T_uint x)
 // stream member function will ensure read extra is safe
 #define DATA_IO_ALLOW_READ_EXTRA
 
-FEBIRD_FORCE_INLINE
+NARK_FORCE_INLINE
 uint32_t gg_load_var_uint30(const unsigned char* buf, const unsigned char** endp)
 {
 #if !defined(DATA_IO_ALLOW_READ_EXTRA)
@@ -147,7 +147,7 @@ uint32_t gg_load_var_uint30(const unsigned char* buf, const unsigned char** endp
 	return x >> 2;
 }
 
-FEBIRD_FORCE_INLINE
+NARK_FORCE_INLINE
 uint64_t gg_load_var_uint61(const unsigned char* buf, const unsigned char** endp)
 {
 #if !defined(DATA_IO_ALLOW_READ_EXTRA)
@@ -179,7 +179,7 @@ uint64_t gg_load_var_uint61(const unsigned char* buf, const unsigned char** endp
 }
 
 template<class Stream>
-FEBIRD_FORCE_INLINE
+NARK_FORCE_INLINE
 uint32_t gg_load_var_uint30_slow(Stream& s)
 {
 	uint32_t x = s.readByte();
@@ -196,7 +196,7 @@ uint32_t gg_load_var_uint30_slow(Stream& s)
 }
 
 template<class Stream>
-FEBIRD_FORCE_INLINE
+NARK_FORCE_INLINE
 uint64_t gg_load_var_uint61_slow(Stream& s)
 {
 	uint64_t x = s.readByte();
@@ -219,7 +219,7 @@ uint64_t gg_load_var_uint61_slow(Stream& s)
 // stream member function will ensure overwrite extra is safe
 #define DATA_IO_ALLOW_OVERWRITE_EXTRA
 
-FEBIRD_FORCE_INLINE
+NARK_FORCE_INLINE
 unsigned char* gg_save_var_uint30(unsigned char* p, uint32_t x)
 {
 	assert(x < 1 << 30);
@@ -286,7 +286,7 @@ unsigned char* gg_save_var_uint30(unsigned char* p, uint32_t x)
 #endif // _MSC_VER
 }
 
-//FEBIRD_FORCE_INLINE
+//NARK_FORCE_INLINE
 inline // auto inline
 unsigned char* gg_save_var_uint61(unsigned char* p, uint64_t x)
 {

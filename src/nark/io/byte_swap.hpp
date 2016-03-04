@@ -119,9 +119,9 @@ typedef boost::mpl::false_  ByteSwap_false;
 // DataIO_need_bswap
 #if defined(BOOST_TYPEOF_NATIVE)
   #ifdef BOOST_TYPEOF_KEYWORD
-    #define FEBIRD_TYPEOF_KEYWORD BOOST_TYPEOF_KEYWORD
+    #define NARK_TYPEOF_KEYWORD BOOST_TYPEOF_KEYWORD
   #else
-    #define FEBIRD_TYPEOF_KEYWORD decltype
+    #define NARK_TYPEOF_KEYWORD decltype
   #endif
   template<class T>
   struct WorkAround_typeof : T {};
@@ -130,7 +130,7 @@ typedef boost::mpl::false_  ByteSwap_false;
   template<class T>
   struct DataIO_need_bswap :
     public WorkAround_typeof<
-	  FEBIRD_TYPEOF_KEYWORD(Deduce_DataIO_need_bswap((T*)NULL))
+	  NARK_TYPEOF_KEYWORD(Deduce_DataIO_need_bswap((T*)NULL))
 	> {};
 #else
   template<class T>

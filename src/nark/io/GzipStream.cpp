@@ -111,7 +111,7 @@ size_t GzipInputStream::read(void* buf, size_t size) throw()
 	return gzread((gzFile)m_fp, buf, size);
 }
 
-FEBIRD_GEN_ensureRead (GzipInputStream::)
+NARK_GEN_ensureRead (GzipInputStream::)
 
 ///////////////////////////////////////////////////////
 
@@ -139,7 +139,7 @@ size_t GzipOutputStream::write(const void* buf, size_t size) throw()
 	assert(m_fp);
 	return gzwrite((gzFile)m_fp, buf, size);
 }
-FEBIRD_GEN_ensureWrite(GzipOutputStream::)
+NARK_GEN_ensureWrite(GzipOutputStream::)
 
 } // namespace nark
 

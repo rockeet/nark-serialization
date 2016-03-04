@@ -33,7 +33,7 @@ private:
 		return *this;
 	}
 
-#ifdef FEBIRD_DATA_IO_ENABLE_LOAD_RAW_CHAR_PTR
+#ifdef NARK_DATA_IO_ENABLE_LOAD_RAW_CHAR_PTR
 public:
 	MyType& operator>>(char*& s) { return load_s0(s); }
 	MyType& operator>>(wchar_t*& s) { return load_s0(s); }

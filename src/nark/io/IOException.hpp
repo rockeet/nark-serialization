@@ -17,7 +17,7 @@ namespace nark {
 #pragma warning(push)
 #pragma warning(disable:4275)
 #endif
-class FEBIRD_DLL_EXPORT IOException : public std::exception
+class NARK_DLL_EXPORT IOException : public std::exception
 {
 protected:
 	std::string m_message;
@@ -38,7 +38,7 @@ public:
 #pragma warning(pop)
 #endif
 
-class FEBIRD_DLL_EXPORT OpenFileException : public IOException
+class NARK_DLL_EXPORT OpenFileException : public IOException
 {
 	std::string m_path;
 public:
@@ -50,7 +50,7 @@ public:
 // blocked streams read 0 bytes will cause this exception
 // other streams read not enough maybe cause this exception
 // all streams read 0 bytes will cause this exception
-class FEBIRD_DLL_EXPORT EndOfFileException : public IOException
+class NARK_DLL_EXPORT EndOfFileException : public IOException
 {
 public:
 	explicit EndOfFileException(const char* szMsg = "nark::EndOfFileException")
@@ -59,7 +59,7 @@ public:
 	explicit EndOfFileException(const std::string& msg) : IOException(msg) {}
 };
 
-class FEBIRD_DLL_EXPORT OutOfSpaceException : public IOException
+class NARK_DLL_EXPORT OutOfSpaceException : public IOException
 {
 public:
 	explicit OutOfSpaceException(const char* szMsg = "nark::OutOfSpaceException")
@@ -68,7 +68,7 @@ public:
 	explicit OutOfSpaceException(const std::string& msg) : IOException(msg) {}
 };
 
-class FEBIRD_DLL_EXPORT DelayWriteException : public IOException
+class NARK_DLL_EXPORT DelayWriteException : public IOException
 {
 public:
 	DelayWriteException(const char* szMsg = "nark::DelayWriteException")
@@ -78,7 +78,7 @@ public:
 //	size_t streamPosition;
 };
 
-class FEBIRD_DLL_EXPORT BrokenPipeException : public IOException
+class NARK_DLL_EXPORT BrokenPipeException : public IOException
 {
 public:
 	BrokenPipeException(const char* szMsg = "nark::BrokenPipeException")

@@ -264,7 +264,7 @@ void DataIO_load_elem(DataIO& dio, T& x, Bswap)
 #endif
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#define FEBIRD_DataInput_NestStreamPtr(DataInput) \
+#define NARK_DataInput_NestStreamPtr(DataInput) \
 private: \
   StreamT* m_stream; \
 public: \
@@ -289,7 +289,7 @@ typedef LittleEndianDataInput MyType;
 
 template<class StreamT>
 class LittleEndianDataInput<StreamT*> {
-	FEBIRD_DataInput_NestStreamPtr(LittleEndianDataInput)
+	NARK_DataInput_NestStreamPtr(LittleEndianDataInput)
 typedef LittleEndianDataInput MyType;
 #include "DataInput_Basic.hpp"
 #include "DataInput_String.hpp"
@@ -311,7 +311,7 @@ typedef BigEndianDataInput MyType;
 
 template<class StreamT>
 class BigEndianDataInput<StreamT*> {
-	FEBIRD_DataInput_NestStreamPtr(BigEndianDataInput)
+	NARK_DataInput_NestStreamPtr(BigEndianDataInput)
 typedef BigEndianDataInput MyType;
 #include "DataInput_Basic.hpp"
 #include "DataInput_String.hpp"
@@ -334,7 +334,7 @@ typedef LittleEndianNoVarIntInput MyType;
 
 template<class StreamT>
 class LittleEndianNoVarIntInput<StreamT*> {
-	FEBIRD_DataInput_NestStreamPtr(LittleEndianNoVarIntInput)
+	NARK_DataInput_NestStreamPtr(LittleEndianNoVarIntInput)
 typedef LittleEndianNoVarIntInput MyType;
 #include "DataInput_Basic.hpp"
 #include "DataInput_String.hpp"
@@ -356,7 +356,7 @@ typedef BigEndianNoVarIntInput MyType;
 
 template<class StreamT>
 class BigEndianNoVarIntInput<StreamT*> {
-	FEBIRD_DataInput_NestStreamPtr(BigEndianNoVarIntInput)
+	NARK_DataInput_NestStreamPtr(BigEndianNoVarIntInput)
 typedef BigEndianNoVarIntInput MyType;
 #include "DataInput_Basic.hpp"
 #include "DataInput_String.hpp"
@@ -402,7 +402,7 @@ unsigned int DataIO_load_check_version(Input& in, unsigned int curr_version, con
   friend void DataIO_loadObject(DataIO& dio, Class& x) { dio.DisableLoadClass(x); }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#if defined(FEBIRD_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE)
+#if defined(NARK_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE)
 #define DATA_IO_OPTIMIZE_VECTOR_LOAD(Class, Members)
 #define DATA_IO_OPTIMIZE_ELEMEN_LOAD(Class, Members)
 #define DATA_IO_OPTIMIZE_ARRAY__LOAD(Class, Members)
@@ -482,7 +482,7 @@ unsigned int DataIO_load_check_version(Input& in, unsigned int curr_version, con
 		Self(x).opt_load(dio, Bswap());				\
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#endif // FEBIRD_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE
+#endif // NARK_DATA_IO_DISABLE_OPTIMIZE_DUMPABLE
 
 #ifdef BOOST_LITTLE_ENDIAN
 	#define NativeDataInput     LittleEndianDataInput
