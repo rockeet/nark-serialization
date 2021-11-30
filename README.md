@@ -1,4 +1,4 @@
-terark-serialization
+nark-serialization
 ==================
 
 
@@ -18,16 +18,16 @@ An easy, fast, small, portable C++ object serialization framework
 I have written a [benchmark vs boost-serialization](http://nark.cc/p/?p=65), but have not written benchmarks with other serilization libraries.
 Fortunately, there is a [benchmark of many serialization library](https://github.com/thekvs/cpp-serializers), including boost-serialization.
 
-You can run benchmark of [terark-serialization vs boost-serialization](#compile) yourself.
+You can run benchmark of [nark-serialization vs boost-serialization](#compile) yourself.
 
 ## Quick Start
 
-terark-serialization is powerful, but using it is very simple:
+nark-serialization is powerful, but using it is very simple:
 
 ```c++
-#include <terark/io/DataIO.hpp>
-#include <terark/io/MemStream.hpp>
-#include <terark/io/FileStream.hpp>
+#include <nark/io/DataIO.hpp>
+#include <nark/io/MemStream.hpp>
+#include <nark/io/FileStream.hpp>
 
 struct MyData1 {
     int  a, b, c;
@@ -117,12 +117,12 @@ int main(int argc, char* argv[]) {
     input & d1 & d2 & d3 & sd1 & sd2; // loading, '&' is an alias of '>>'
 }
 ```
-Is it a magic? I wrote the first version of terark-serialization at July 2006, three months later, I wrote [terark-rpc](https://github.com/terark/terark-rpc) on top of terark-serialization.
+Is it a magic? I wrote the first version of nark-serialization at July 2006, three months later, I wrote [nark-rpc](https://github.com/rockeet/nark-rpc) on top of nark-serialization.
 
 ## Compile
 ```bash
-$ cd path/to/terark-base
-$ make # compile terark-base
+$ cd path/to/nark-base
+$ make # compile nark-base
 $ cd test-serialization
 $ make # compile test and benchmark
 $ rls/bench.exe # run benchmark
@@ -131,4 +131,5 @@ $ rls/bench.exe # run benchmark
 ## More
 
 To be done
+
 
