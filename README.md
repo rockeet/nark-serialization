@@ -1,7 +1,7 @@
 nark-serialization
 ==================
 
-## Now please using [topling-ark](https://github.com/topling/topling-ark) which contains the newest version
+## The newest version is in [topling-ark](https://github.com/topling/topling-ark)
 
 An easy, fast, small, portable C++ object serialization framework
 
